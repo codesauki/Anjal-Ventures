@@ -36,7 +36,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['var(--font-dm-sans)', 'sans-serif'],
-        display: ['var(--font-playfair)', 'serif'],
+        display: ['var(--font-dm-sans)', 'sans-serif'],
         mono: ['var(--font-dm-mono)', 'monospace'],
       },
       animation: {

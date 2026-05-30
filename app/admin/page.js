@@ -1,130 +1,115 @@
 'use client'
-import { useEffect, useState } from 'react'
+
 import AdminSidebar from '@/components/AdminSidebar'
-import TestimonialsModal from '@/components/TestimonialsModal'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { ArrowRight, BriefcaseBusiness, FileText, Inbox, Smartphone } from 'lucide-react'
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState(null)
   const [messages, setMessages] = useState([])
-  const [testimonialsModalOpen, setTestimonialsModalOpen] = useState(false)
+  const [submissions, setSubmissions] = useState([])
 
   useEffect(() => {
-    // Fetch stats from various endpoints
     Promise.all([
       fetch('/api/admin/projects').then(r => r.json()),
-      fetch('/api/admin/services').then(r => r.json()),
-      fetch('/api/admin/pricing').then(r => r.json()),
       fetch('/api/admin/contacts').then(r => r.json()),
       fetch('/api/admin/quotations').then(r => r.json()),
-    ]).then(([projects, services, pricing, contacts, quotations]) => {
+      fetch('/api/admin/app-studio').then(r => r.json()),
+    ]).then(([projects, contacts, quotations, studio]) => {
+      const safeContacts = Array.isArray(contacts) ? contacts : []
+      const safeQuotes = Array.isArray(quotations) ? quotations : []
       setStats({
-        projects: projects.length || 0,
-        services: services.length || 0,
-        pricing: pricing.length || 0,
-        contacts: contacts.length || 0,
-        unread: (contacts || []).filter(c => !c.is_read).length,
-        quotations: quotations.length || 0,
+        projects: Array.isArray(projects) ? projects.length : 0,
+        apps: (Array.isArray(projects) ? projects : []).filter(p => p.project_type === 'mobile-app').length,
+        contacts: safeContacts.length,
+        unread: safeContacts.filter(c => !c.is_read).length,
+        quotations: safeQuotes.length,
+        appLeads: studio?.submissions?.length || 0,
       })
-      setMessages((contacts || []).slice(0, 5))
+      setMessages(safeContacts.slice(0, 5))
+      setSubmissions((studio?.submissions || []).slice(0, 5))
     }).catch(() => {})
   }, [])
 
-  const quickLinks = [
-    { href: '/admin/projects', label: 'Add Project', icon: '📁', desc: 'Upload new portfolio project' },
-    { href: '/admin/services', label: 'Edit Services', icon: '⚡', desc: 'Manage service offerings' },
-    { href: '/admin/pricing', label: 'Update Pricing', icon: '💰', desc: 'Modify pricing plans' },
-    { href: '/admin/calculator', label: 'Calculator Items', icon: '🧮', desc: 'Edit estimator services' },
-    { href: '/admin/testimonials', label: 'Manage Testimonials', icon: '💬', desc: 'View, edit & publish testimonies', onClick: (e) => { e.preventDefault(); setTestimonialsModalOpen(true) } },
-    { href: '/admin/settings', label: 'Site Settings', icon: '⚙️', desc: 'Update contact info & config' },
-    { href: '/admin/contacts', label: 'View Messages', icon: '📩', desc: `${stats?.unread || 0} unread messages` },
+  const tiles = [
+    { label: 'Projects', value: stats?.projects ?? '-', icon: BriefcaseBusiness, href: '/admin/projects' },
+    { label: 'Mobile apps', value: stats?.apps ?? '-', icon: Smartphone, href: '/admin/projects' },
+    { label: 'Proposals', value: stats?.quotations ?? '-', icon: FileText, href: '/admin/quotations' },
+    { label: 'Leads', value: stats?.contacts ?? '-', icon: Inbox, href: '/admin/contacts', badge: stats?.unread },
   ]
 
   return (
-    <div className="flex min-h-screen">
+    <div className="min-h-screen bg-slate-50">
       <AdminSidebar />
-      <main className="ml-64 flex-1 p-8">
-        <div className="mb-8">
-          <h1 className="font-display text-3xl text-navy mb-1">Admin Dashboard</h1>
-          <p className="text-slate-500 text-sm">Welcome back. You have full control over your Anjal Ventures website.</p>
+      <main className="ml-64 p-8">
+        <div className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+          <div>
+            <p className="mb-2 text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Admin</p>
+            <h1 className="text-3xl font-semibold tracking-normal text-slate-950">Operations dashboard</h1>
+            <p className="mt-2 text-sm text-slate-500">Manage the public platform, proposals, App Studio leads, and content.</p>
+          </div>
+          <Link href="/app-studio" target="_blank" className="inline-flex items-center gap-2 rounded-lg bg-slate-950 px-4 py-2.5 text-sm font-bold text-white hover:bg-blue-700">
+            Preview App Studio
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
-          {[
-            { label: 'Projects', value: stats?.projects ?? '—', icon: '📁', color: 'bg-blue-50 text-blue-600' },
-            { label: 'Services', value: stats?.services ?? '—', icon: '⚡', color: 'bg-green-50 text-green-600' },
-            { label: 'Messages', value: stats?.contacts ?? '—', icon: '📩', color: 'bg-amber-50 text-amber-600', badge: stats?.unread },
-            { label: 'Quotations', value: stats?.quotations ?? '—', icon: '📋', color: 'bg-purple-50 text-purple-600' },
-          ].map(s => (
-            <div key={s.label} className="admin-card relative overflow-hidden">
-              <div className={`w-11 h-11 rounded-xl flex items-center justify-center text-xl mb-3 ${s.color}`}>
-                {s.icon}
-              </div>
-              <div className="font-display text-4xl font-bold text-navy mb-1">{s.value}</div>
-              <div className="text-sm text-slate-500">{s.label}</div>
-              {s.badge > 0 && (
-                <div className="absolute top-4 right-4 bg-red-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
-                  {s.badge}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-
-        {/* Quick Actions */}
-        <div className="mb-10">
-          <h2 className="font-bold text-navy text-sm uppercase tracking-widest mb-4">Quick Actions</h2>
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-            {quickLinks.map(link => (
-              <Link key={link.href} href={link.href}
-                onClick={link.onClick}
-                className="admin-card hover:border-brand-green hover:bg-brand-green-pale/30 transition-all group p-5 cursor-pointer">
-                <div className="text-2xl mb-2">{link.icon}</div>
-                <div className="font-semibold text-navy text-sm mb-1 group-hover:text-brand-green transition-colors">{link.label}</div>
-                <div className="text-xs text-slate-400">{link.desc}</div>
+        <div className="mb-8 grid gap-4 md:grid-cols-4">
+          {tiles.map(tile => {
+            const Icon = tile.icon
+            return (
+              <Link key={tile.label} href={tile.href} className="relative rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition hover:border-slate-300 hover:shadow-md">
+                <Icon className="mb-8 h-5 w-5 text-blue-700" />
+                <p className="text-4xl font-bold text-slate-950">{tile.value}</p>
+                <p className="mt-1 text-sm font-semibold text-slate-500">{tile.label}</p>
+                {tile.badge > 0 && <span className="absolute right-4 top-4 rounded-full bg-red-600 px-2 py-0.5 text-xs font-bold text-white">{tile.badge}</span>}
               </Link>
+            )
+          })}
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-2">
+          <Panel title="Recent leads" href="/admin/contacts">
+            {messages.length === 0 ? <Empty text="No contact leads yet." /> : messages.map(message => (
+              <Row key={message.id} title={message.name} meta={[message.email, message.service].filter(Boolean).join(' / ')} value={new Date(message.created_at).toLocaleDateString()} />
             ))}
-          </div>
+          </Panel>
+          <Panel title="App Studio submissions" href="/admin/app-studio">
+            {submissions.length === 0 ? <Empty text="No App Studio submissions yet." /> : submissions.map(item => (
+              <Row key={item.id} title={item.app_name} meta={`${item.client_name || 'Client'} / ${item.preset_key || 'preset'}`} value={`$${Number(item.total_amount || 0).toLocaleString()}`} />
+            ))}
+          </Panel>
         </div>
-
-        {/* Recent Messages */}
-        <div>
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="font-bold text-navy text-sm uppercase tracking-widest">Recent Messages</h2>
-            <Link href="/admin/contacts" className="text-xs text-brand-green font-semibold hover:underline">View All →</Link>
-          </div>
-          <div className="admin-card">
-            {messages.length === 0 ? (
-              <p className="text-slate-400 text-sm text-center py-8">No contact messages yet.</p>
-            ) : (
-              <div className="flex flex-col gap-3">
-                {messages.map(m => (
-                  <div key={m.id} className={`flex items-start gap-4 p-4 rounded-lg ${!m.is_read ? 'bg-blue-50 border border-blue-100' : 'bg-slate-50'}`}>
-                    <div className="w-9 h-9 bg-navy rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
-                      {m.name?.[0]?.toUpperCase() || '?'}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-0.5">
-                        <span className="font-semibold text-navy text-sm">{m.name}</span>
-                        {!m.is_read && <span className="bg-blue-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">NEW</span>}
-                      </div>
-                      <div className="text-xs text-slate-400 mb-1">{m.email} · {m.service || 'No service specified'}</div>
-                      <p className="text-sm text-slate-600 truncate">{m.message}</p>
-                    </div>
-                    <div className="text-[11px] text-slate-300 flex-shrink-0">
-                      {new Date(m.created_at).toLocaleDateString()}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Testimonials Modal */}
-        <TestimonialsModal isOpen={testimonialsModalOpen} onClose={() => setTestimonialsModalOpen(false)} />
       </main>
     </div>
   )
+}
+
+function Panel({ title, href, children }) {
+  return (
+    <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+      <div className="mb-4 flex items-center justify-between">
+        <h2 className="text-sm font-bold uppercase tracking-[0.18em] text-slate-500">{title}</h2>
+        <Link href={href} className="text-sm font-bold text-blue-700">Open</Link>
+      </div>
+      <div className="space-y-3">{children}</div>
+    </section>
+  )
+}
+
+function Row({ title, meta, value }) {
+  return (
+    <div className="flex items-center justify-between gap-4 rounded-lg bg-slate-50 p-4">
+      <div className="min-w-0">
+        <p className="truncate text-sm font-bold text-slate-950">{title || 'Untitled'}</p>
+        <p className="mt-1 truncate text-xs text-slate-500">{meta}</p>
+      </div>
+      <p className="text-xs font-bold text-slate-500">{value}</p>
+    </div>
+  )
+}
+
+function Empty({ text }) {
+  return <p className="rounded-lg border border-dashed border-slate-300 p-8 text-center text-sm text-slate-500">{text}</p>
 }

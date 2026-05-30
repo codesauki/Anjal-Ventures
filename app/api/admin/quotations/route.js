@@ -1,14 +1,20 @@
 import { NextResponse } from 'next/server'
-import { getDb } from '@/lib/db'
+import { getDb, initDb } from '@/lib/db'
 
 export async function GET() {
-  const sql = getDb()
-  const quotations = await sql`SELECT * FROM quotation_requests ORDER BY created_at DESC`
-  return NextResponse.json(quotations)
+  try {
+    await initDb()
+    const sql = getDb()
+    const quotations = await sql`SELECT * FROM quotation_requests ORDER BY created_at DESC`
+    return NextResponse.json(quotations)
+  } catch (err) {
+    return NextResponse.json({ error: err.message }, { status: 500 })
+  }
 }
 
 export async function DELETE(request) {
   try {
+    await initDb()
     const sql = getDb()
     const { searchParams } = new URL(request.url)
     const id = searchParams.get('id')

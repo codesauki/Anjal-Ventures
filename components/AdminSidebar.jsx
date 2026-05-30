@@ -1,19 +1,37 @@
 'use client'
-import Link from 'next/link'
+
 import Image from 'next/image'
+import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
+import {
+  BarChart3,
+  BriefcaseBusiness,
+  Calculator,
+  FileText,
+  Inbox,
+  Layers3,
+  LogOut,
+  MessageSquareQuote,
+  Settings,
+  Smartphone,
+  Star,
+  Users,
+  WalletCards,
+} from 'lucide-react'
 import { useState } from 'react'
 
 const navItems = [
-  { href: '/admin', label: 'Dashboard', icon: '📊' },
-  { href: '/admin/projects', label: 'Projects', icon: '📁' },
-  { href: '/admin/services', label: 'Services', icon: '⚡' },
-  { href: '/admin/pricing', label: 'Pricing Plans', icon: '💰' },
-  { href: '/admin/calculator', label: 'Calculator Items', icon: '🧮' },
-  { href: '/admin/testimonials', label: 'Testimonials', icon: '⭐' },
-  { href: '/admin/contacts', label: 'Contact Messages', icon: '📩' },
-  { href: '/admin/quotations', label: 'Quotations', icon: '📋' },
-  { href: '/admin/settings', label: 'Site Settings', icon: '⚙️' },
+  { href: '/admin', label: 'Dashboard', icon: BarChart3 },
+  { href: '/admin/projects', label: 'Projects', icon: BriefcaseBusiness },
+  { href: '/admin/app-studio', label: 'App Studio', icon: Smartphone },
+  { href: '/admin/services', label: 'Services', icon: Layers3 },
+  { href: '/admin/pricing', label: 'Pricing', icon: WalletCards },
+  { href: '/admin/calculator', label: 'Quote Catalog', icon: Calculator },
+  { href: '/admin/quotations', label: 'Proposals', icon: FileText },
+  { href: '/admin/contacts', label: 'Leads', icon: Inbox },
+  { href: '/admin/testimonials', label: 'Testimonials', icon: Star },
+  { href: '/admin/settings', label: 'Settings', icon: Settings },
+  { href: '/admin/users', label: 'Admin Users', icon: Users },
 ]
 
 export default function AdminSidebar() {
@@ -28,53 +46,49 @@ export default function AdminSidebar() {
   }
 
   return (
-    <aside className="w-64 bg-navy min-h-screen flex flex-col fixed left-0 top-0 bottom-0 z-30">
-      {/* Logo */}
-      <div className="p-6 border-b border-white/8">
-        <div className="flex items-center gap-3 mb-1">
-          <div className="w-9 h-9 relative flex-shrink-0">
-            <picture>
-              <source srcSet="/logo-sm.webp" type="image/webp" />
-              <Image src="/logo.png" alt="Logo" fill className="object-contain" onError={() => {}} />
-            </picture>
+    <aside className="fixed inset-y-0 left-0 z-30 flex w-64 flex-col border-r border-slate-200 bg-white">
+      <div className="border-b border-slate-200 p-5">
+        <div className="flex items-center gap-3">
+          <div className="relative h-10 w-10 overflow-hidden rounded-lg border border-slate-200">
+            <Image src="/logo.png" alt="Anjal Ventures" fill className="object-contain p-1.5" />
           </div>
           <div>
-            <div className="font-display font-bold text-white text-sm">Anjal Ventures</div>
-            <div className="text-[10px] text-white/30 font-mono uppercase">Admin Panel</div>
+            <p className="text-sm font-bold text-slate-950">Anjal Ventures</p>
+            <p className="text-xs text-slate-500">Operations console</p>
           </div>
         </div>
       </div>
 
-      {/* Nav */}
-      <nav className="flex-1 p-4">
-        <div className="text-[10px] text-white/25 uppercase tracking-widest font-bold px-3 mb-3">Management</div>
-        <div className="flex flex-col gap-1">
+      <nav className="flex-1 overflow-y-auto p-4">
+        <p className="mb-3 px-3 text-xs font-bold uppercase tracking-[0.2em] text-slate-400">Platform</p>
+        <div className="space-y-1">
           {navItems.map(item => {
-            const isActive = pathname === item.href || (item.href !== '/admin' && pathname.startsWith(item.href))
+            const active = pathname === item.href || (item.href !== '/admin' && pathname.startsWith(item.href))
+            const Icon = item.icon
             return (
-              <Link key={item.href} href={item.href}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
-                  isActive ? 'bg-white/15 text-white' : 'text-white/45 hover:text-white hover:bg-white/8'
-                }`}>
-                <span className="text-base">{item.icon}</span>
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold transition ${active ? 'bg-slate-950 text-white' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-950'}`}
+              >
+                <Icon className="h-4 w-4" />
                 {item.label}
-                {isActive && <span className="ml-auto w-1.5 h-1.5 bg-brand-green rounded-full" />}
               </Link>
             )
           })}
         </div>
-
-        <div className="mt-8 border-t border-white/8 pt-4">
-          <Link href="/" target="_blank"
-            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-white/35 hover:text-white hover:bg-white/8 transition-all">
-            <span>🌐</span> View Website
-          </Link>
-          <button onClick={handleLogout} disabled={loggingOut}
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-red-400 hover:text-red-300 hover:bg-red-500/10 transition-all">
-            <span>🚪</span> {loggingOut ? 'Logging out...' : 'Logout'}
-          </button>
-        </div>
       </nav>
+
+      <div className="border-t border-slate-200 p-4">
+        <Link href="/" target="_blank" className="mb-2 flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-100">
+          <MessageSquareQuote className="h-4 w-4" />
+          View website
+        </Link>
+        <button onClick={handleLogout} disabled={loggingOut} className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold text-red-600 hover:bg-red-50">
+          <LogOut className="h-4 w-4" />
+          {loggingOut ? 'Signing out...' : 'Sign out'}
+        </button>
+      </div>
     </aside>
   )
 }

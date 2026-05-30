@@ -5,6 +5,7 @@ export async function POST(request) {
   try {
     const formData = await request.formData()
     const file = formData.get('file')
+    const folder = String(formData.get('folder') || 'projects')
 
     if (!file) {
       return NextResponse.json({ error: 'No file provided' }, { status: 400 })
@@ -21,7 +22,8 @@ export async function POST(request) {
       return NextResponse.json({ error: 'File too large. Maximum size is 5MB.' }, { status: 400 })
     }
 
-    const filename = `projects/${Date.now()}-${file.name.replace(/[^a-z0-9.-]/gi, '-').toLowerCase()}`
+    const safeFolder = folder.replace(/[^a-z0-9-_/]/gi, '').replace(/^\/+|\/+$/g, '') || 'projects'
+    const filename = `${safeFolder}/${Date.now()}-${file.name.replace(/[^a-z0-9.-]/gi, '-').toLowerCase()}`
 
     const blob = await put(filename, file, {
       access: 'public',

@@ -9,27 +9,22 @@ export default async function sitemap() {
     const sql = getDb()
 
     // Get all dynamic content
-    const [projects, services] = await Promise.all([
-      sql`SELECT id FROM projects WHERE is_active = true`,
-      sql`SELECT id FROM services WHERE is_active = true`,
-    ])
+    const projects = await sql`SELECT id, slug FROM projects WHERE is_active = true`
 
-    // Static pages
     const staticPages = [
       { url: '', priority: 1.0, changefreq: 'weekly' },
-      { url: '/admin/login', priority: 0.5, changefreq: 'monthly' },
+      { url: '/services', priority: 0.9, changefreq: 'weekly' },
+      { url: '/work', priority: 0.9, changefreq: 'weekly' },
+      { url: '/work/apps', priority: 0.8, changefreq: 'weekly' },
+      { url: '/work/websites', priority: 0.8, changefreq: 'weekly' },
+      { url: '/app-studio', priority: 0.9, changefreq: 'weekly' },
+      { url: '/quote', priority: 0.9, changefreq: 'weekly' },
+      { url: '/about', priority: 0.7, changefreq: 'monthly' },
+      { url: '/contact', priority: 0.7, changefreq: 'monthly' },
     ]
 
-    // Dynamic project pages (if you have individual project pages)
     const projectPages = projects.map((p) => ({
-      url: `/projects/${p.id}`,
-      priority: 0.7,
-      changefreq: 'monthly',
-    }))
-
-    // Dynamic service pages (if you have individual service pages)
-    const servicePages = services.map((s) => ({
-      url: `/services/${s.id}`,
+      url: `/work/${p.slug || p.id}`,
       priority: 0.7,
       changefreq: 'monthly',
     }))
@@ -37,7 +32,6 @@ export default async function sitemap() {
     return [
       ...staticPages,
       ...projectPages,
-      ...servicePages,
     ].map((page) => ({
       url: `${baseUrl}${page.url}`,
       lastModified,

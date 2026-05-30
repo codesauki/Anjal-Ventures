@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server'
-import { getDb } from '@/lib/db'
+import { getDb, initDb } from '@/lib/db'
 
 export async function POST(request) {
   try {
+    await initDb()
     const sql = getDb()
     const { name, email, phone, service, budget, message } = await request.json()
 
