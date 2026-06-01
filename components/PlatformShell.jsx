@@ -2,8 +2,9 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight, Mail, Menu, Phone, X } from 'lucide-react'
+import { ArrowRight, Mail, MapPin, Menu, MessageCircle, X } from 'lucide-react'
 import { useState } from 'react'
+import { normalizeCompanyAddress } from '@/lib/company'
 
 const nav = [
   { href: '/services', label: 'Services' },
@@ -74,9 +75,13 @@ export function SiteHeader({ settings = {} }) {
 }
 
 export function SiteFooter({ settings = {} }) {
+  const whatsappNumber = settings.company_whatsapp || settings.company_phone || '2348164135836'
+  const whatsappUrl = `https://wa.me/${String(whatsappNumber).replace(/[^0-9]/g, '')}`
+  const address = normalizeCompanyAddress(settings.company_address)
+
   return (
     <footer className="border-t border-slate-200 bg-slate-950 text-white">
-      <div className="mx-auto grid max-w-7xl gap-10 px-5 py-12 md:grid-cols-[1.2fr_.8fr_.8fr] lg:px-8">
+      <div className="mx-auto grid max-w-7xl gap-10 px-5 py-12 md:grid-cols-[1.05fr_.75fr_1fr] lg:px-8">
         <div>
           <div className="mb-5 flex items-center gap-3">
             <span className="relative h-10 w-10 overflow-hidden rounded-lg bg-white">
@@ -102,13 +107,25 @@ export function SiteFooter({ settings = {} }) {
         <div>
           <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-white/40">Contact</p>
           <div className="space-y-3 text-sm text-white/65">
-            <a href={`mailto:${settings.company_email || 'anjalventures@gmail.com'}`} className="flex items-center gap-2 hover:text-white">
+            <a href={`mailto:${settings.company_email || 'anjalventures@gmail.com'}`} className="flex items-center gap-2 rounded-lg transition hover:text-white">
               <Mail className="h-4 w-4" />
               {settings.company_email || 'anjalventures@gmail.com'}
             </a>
-            <a href={`tel:${settings.company_phone || ''}`} className="flex items-center gap-2 hover:text-white">
-              <Phone className="h-4 w-4" />
-              {settings.company_phone || '+234 000 000 0000'}
+            <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
+              <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-white/35">
+                <MapPin className="h-4 w-4 text-emerald-300" />
+                Registered office
+              </div>
+              <p className="text-sm leading-6 text-white/70">{address}</p>
+            </div>
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-400 px-4 py-3 text-sm font-bold text-slate-950 transition hover:bg-emerald-300"
+            >
+              <MessageCircle className="h-4 w-4" />
+              Chat on WhatsApp
             </a>
           </div>
         </div>

@@ -4,7 +4,7 @@ export default function About({ settings = {} }) {
   const aboutText = settings.about_text || 'Anjal Ventures is a registered Nigerian technology enterprise delivering world-class digital solutions to businesses, institutions, and organisations across Nigeria and the African continent.'
   const cac = settings.company_cac || 'BN 9258709'
   const tin = settings.company_tin || '2623553716975'
-  const address = settings.company_address || 'Damaturu, Yobe State, Nigeria'
+  const address = settings.company_address || 'No. 4, MJG Global Ventures Complex, Kolomi Ali Street, Sabon Pegi, Damaturu, Yobe State, Nigeria'
 
   return (
     <section id="about" className="section bg-gradient-to-r from-apple-light via-white to-apple-light py-24">

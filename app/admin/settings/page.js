@@ -15,7 +15,7 @@ const SETTING_GROUPS = [
       { key: 'company_phone', label: 'Primary Phone Number', placeholder: '+234 000 000 0000' },
       { key: 'company_phone_alternate', label: 'Alternate Phone Number', placeholder: '+234 000 000 0000' },
       { key: 'company_whatsapp', label: 'WhatsApp Number (digits only)', placeholder: '2348012345678' },
-      { key: 'company_address', label: 'Office Address', placeholder: 'Damaturu, Yobe State, Nigeria' },
+      { key: 'company_address', label: 'Office Address', placeholder: 'No. 4, MJG Global Ventures Complex, Kolomi Ali Street, Sabon Pegi, Damaturu, Yobe State, Nigeria' },
       { key: 'company_cac', label: 'CAC Registration Number', placeholder: 'BN 9258709' },
       { key: 'company_tin', label: 'Tax ID (TIN)', placeholder: '2623553716975' },
     ],

@@ -92,7 +92,7 @@ export default function RootLayout({ children }) {
       addressCountry: 'NG',
       addressRegion: 'Yobe',
       addressLocality: 'Damaturu',
-      streetAddress: 'Damaturu',
+      streetAddress: 'No. 4, MJG Global Ventures Complex, Kolomi Ali Street, Sabon Pegi',
     },
     contactPoint: {
       '@type': 'ContactPoint',

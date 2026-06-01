@@ -1,5 +1,6 @@
 'use client'
 import Image from 'next/image'
+import { normalizeCompanyAddress } from '@/lib/company'
 
 export function Footer({ settings = {} }) {
   const companyName = settings.company_name || 'Anjal Ventures'
@@ -7,14 +8,15 @@ export function Footer({ settings = {} }) {
   const email2 = settings.company_email2 || 'contact@anjal.com'
   const cac = settings.company_cac || 'BN 9258709'
   const tin = settings.company_tin || '2623553716975'
-  const address = settings.company_address || 'Damaturu, Yobe State, Nigeria'
-  const tagline = settings.footer_tagline || 'We Build Digital Excellence — From Damaturu to the World.'
+  const address = normalizeCompanyAddress(settings.company_address)
+  const tagline = settings.footer_tagline || 'We Build Digital Excellence - From Damaturu to the World.'
+  const whatsappNumber = settings.company_whatsapp || settings.company_phone || '2348164135836'
+  const whatsappUrl = `https://wa.me/${String(whatsappNumber).replace(/[^0-9]/g, '')}`
 
   return (
     <footer className="bg-apple-dark border-t border-apple-light-secondary pt-16 pb-8">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 relative flex-shrink-0">
@@ -30,14 +32,22 @@ export function Footer({ settings = {} }) {
             <p className="text-sm text-white/45 leading-relaxed mb-6 max-w-sm">{tagline}</p>
             <div className="bg-apple-blue/10 border border-apple-blue/20 rounded-xl p-4">
               <p className="text-xs text-white/40 leading-relaxed">
-                <span className="text-apple-blue font-semibold">CAC Registered:</span> {cac} ·{' '}
+                <span className="text-apple-blue font-semibold">CAC Registered:</span> {cac} /{' '}
                 <span className="text-apple-blue font-semibold">TIN:</span> {tin}<br />
-                {address} · Status: <span className="text-apple-blue font-semibold">ACTIVE</span>
+                <span className="text-apple-blue font-semibold">Registered office:</span> {address}<br />
+                Status: <span className="text-apple-blue font-semibold">ACTIVE</span>
               </p>
             </div>
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-flex items-center justify-center rounded-lg bg-[#25D366] px-4 py-3 text-sm font-bold text-slate-950 transition-all hover:brightness-110"
+            >
+              Chat on WhatsApp
+            </a>
           </div>
 
-          {/* Services */}
           <div>
             <div className="text-xs font-bold text-white/35 uppercase tracking-widest mb-5">Services</div>
             <ul className="space-y-3">
@@ -47,7 +57,6 @@ export function Footer({ settings = {} }) {
             </ul>
           </div>
 
-          {/* Company */}
           <div>
             <div className="text-xs font-bold text-white/35 uppercase tracking-widest mb-5">Company</div>
             <ul className="space-y-3">
@@ -63,7 +72,7 @@ export function Footer({ settings = {} }) {
         </div>
 
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/25">© 2026 {companyName}. All rights reserved. CAC {cac}.</p>
+          <p className="text-xs text-white/25">Copyright 2026 {companyName}. All rights reserved. CAC {cac}.</p>
           <div className="flex gap-6">
             <span className="text-xs text-white/25 cursor-pointer hover:text-apple-blue transition-colors">Terms & Conditions</span>
             <span className="text-xs text-white/25 cursor-pointer hover:text-apple-blue transition-colors">Privacy Policy</span>
@@ -75,8 +84,8 @@ export function Footer({ settings = {} }) {
 }
 
 export function WhatsAppButton({ settings = {} }) {
-  const wa = settings.company_whatsapp || '2348164135836'
-  const waUrl = `https://wa.me/${wa.replace(/[^0-9]/g, '')}`
+  const wa = settings.company_whatsapp || settings.company_phone || '2348164135836'
+  const waUrl = `https://wa.me/${String(wa).replace(/[^0-9]/g, '')}`
 
   return (
     <a href={waUrl} target="_blank" rel="noopener noreferrer"
