@@ -19,11 +19,39 @@ import {
 import PlatformShell from '@/components/PlatformShell'
 import { CtaBand } from '@/components/PlatformSections'
 import { getPlatformData } from '@/lib/platform-data'
+import { getDb } from '@/lib/db'
 import ProjectStoreBadges from '@/components/StoreBadges'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export async function generateMetadata({ params }) {
+  const resolvedParams = await Promise.resolve(params)
+  const targetSlug = decodeURIComponent(String(resolvedParams?.slug || '')).toLowerCase().trim()
   const { projects } = await getPlatformData()
-  const project = projects.find(item => String(item.slug) === params.slug || String(item.id) === params.slug)
+  let project = projects.find(item => {
+    const s = String(item.slug || '').toLowerCase().trim()
+    const id = String(item.id || '').trim()
+    return s === targetSlug || id === targetSlug
+  })
+
+  if (!project) {
+    try {
+      const sql = getDb()
+      const rows = await sql`
+        SELECT * FROM projects
+        WHERE is_active = true
+          AND (lower(slug) = ${targetSlug} OR id::text = ${targetSlug})
+        LIMIT 1
+      `
+      if (rows && rows[0]) {
+        project = rows[0]
+      }
+    } catch (e) {
+      console.error('generateMetadata db fallback error:', e)
+    }
+  }
+
   return {
     title: project ? `${project.title} — Architectural Case Study | Anjal Ventures` : 'Project Case Study — Anjal Ventures',
     description:
@@ -34,10 +62,65 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function ProjectDetailPage({ params }) {
+  const resolvedParams = await Promise.resolve(params)
+  const targetSlug = decodeURIComponent(String(resolvedParams?.slug || '')).toLowerCase().trim()
+
   const { settings, projects } = await getPlatformData()
-  const currentIndex = projects.findIndex(item => String(item.slug) === params.slug || String(item.id) === params.slug)
-  const project = projects[currentIndex]
-  const nextProject = currentIndex >= 0 ? projects[(currentIndex + 1) % projects.length] : null
+  let project = projects.find(item => {
+    const s = String(item.slug || '').toLowerCase().trim()
+    const id = String(item.id || '').trim()
+    return s === targetSlug || id === targetSlug
+  })
+
+  // Direct database query fallback if not found in platform data
+  if (!project) {
+    try {
+      const sql = getDb()
+      const rows = await sql`
+        SELECT * FROM projects
+        WHERE is_active = true
+          AND (lower(slug) = ${targetSlug} OR id::text = ${targetSlug})
+        LIMIT 1
+      `
+      if (rows && rows[0]) {
+        const media = await sql`
+          SELECT * FROM project_media
+          WHERE project_id = ${rows[0].id}
+          ORDER BY display_order, id
+        `
+        project = { ...rows[0], media }
+      }
+    } catch (e) {
+      console.error('Direct fallback query error for project:', e)
+    }
+  }
+
+  // Ensure media array is populated if empty
+  if (project && (!project.media || project.media.length === 0)) {
+    try {
+      const sql = getDb()
+      const media = await sql`
+        SELECT * FROM project_media
+        WHERE project_id = ${project.id}
+        ORDER BY display_order, id
+      `
+      if (media && media.length > 0) {
+        project = { ...project, media }
+      }
+    } catch (e) {
+      console.error('Error fetching project media fallback:', e)
+    }
+  }
+
+  let nextProject = null
+  if (projects.length > 0 && project) {
+    const currentIndex = projects.findIndex(p => p.id === project.id)
+    if (currentIndex >= 0) {
+      nextProject = projects[(currentIndex + 1) % projects.length]
+    } else {
+      nextProject = projects[0]
+    }
+  }
 
   if (!project) {
     return (

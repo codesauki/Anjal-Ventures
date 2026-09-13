@@ -20,3 +20,5 @@
 | **Phase 5** | Validate Next.js production build for Phase 5 | `npm run build` | Completed | Clean compilation, 47/47 routes static rendering |
 | **Phase 6** | Overhaul `/about` corporate studio manifesto | `app/about/page.js`, `components/About.jsx` | Completed | Studio manifesto, institutional governance, CAC 9258709, D-U-N-S 352294840, Damaturu HQ, technical benchmarks |
 | **Phase 7** | Global polish, typography, SEO, deployment | All pages, `sitemap.js`, git push | Completed | Schema sanitized, official emails unified, build verified (47/47 routes), pushed to production |
+| **Phase 8** | My NELFund project ingestion & asset pipeline | Neon DB, Vercel Blob, `public/projects/mynelfund/` | Completed | Uploaded 4 high-res screens to Vercel Blob & local fallback, seeded store links and statutory details |
+| **Phase 8** | Dynamic route resolution & DB query fallback for `/work/[slug]` | `app/work/[slug]/page.js`, `app/work/page.js`, `app/work/apps/page.js`, `app/work/websites/page.js`, `lib/db.js` | Completed | Added `force-dynamic`, revalidate 0, direct DB query fallback, URL decoding, and eliminated pooler advisory lock contention |

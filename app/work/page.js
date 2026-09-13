@@ -4,6 +4,9 @@ import PlatformShell from '@/components/PlatformShell'
 import { CtaBand, ProjectGrid } from '@/components/PlatformSections'
 import { getPlatformData } from '@/lib/platform-data'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export const metadata = {
   title: 'Selected Work & Case Studies - Anjal Ventures',
   description:
