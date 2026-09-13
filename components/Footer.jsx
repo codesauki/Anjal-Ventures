@@ -4,8 +4,8 @@ import { normalizeCompanyAddress } from '@/lib/company'
 
 export function Footer({ settings = {} }) {
   const companyName = settings.company_name || 'Anjal Ventures'
-  const email1 = settings.company_email || 'anjalventures@gmail.com'
-  const email2 = settings.company_email2 || 'contact@anjal.com'
+  const email1 = settings.company_email || 'contact@anjalventures.com'
+  const email2 = settings.company_email2 || 'developers@anjalventures.com'
   const cac = (settings.company_cac || '9258709').replace(/^BN\s*[:\-\s]?\s*/i, '')
   const duns = settings.company_duns || '352294840'
   const tin = settings.company_tin || '2623553716975'
@@ -53,8 +53,15 @@ export function Footer({ settings = {} }) {
           <div>
             <div className="text-xs font-bold text-white/35 uppercase tracking-widest mb-5">Services</div>
             <ul className="space-y-3">
-              {['Web Development', 'Android Mobile Apps', 'Enterprise SaaS', 'AI & Automation', 'SME Solutions', 'Tech Training'].map(s => (
-                <li key={s}><a href="#services" className="text-sm text-white/50 hover:text-apple-blue transition-colors">{s}</a></li>
+              {[
+                ['Web Platforms & Cloud', '/services'],
+                ['Native Mobile Apps', '/services'],
+                ['Enterprise SaaS', '/services'],
+                ['AI & Automations', '/services'],
+                ['Interactive App Studio', '/app-studio'],
+                ['Custom Scope Estimator', '/quote'],
+              ].map(([label, href]) => (
+                <li key={label}><a href={href} className="text-sm text-white/50 hover:text-apple-blue transition-colors">{label}</a></li>
               ))}
             </ul>
           </div>
@@ -62,10 +69,10 @@ export function Footer({ settings = {} }) {
           <div>
             <div className="text-xs font-bold text-white/35 uppercase tracking-widest mb-5">Company</div>
             <ul className="space-y-3">
-              <li><a href="#about" className="text-sm text-white/50 hover:text-apple-blue transition-colors">About Us</a></li>
-              <li><a href="#portfolio" className="text-sm text-white/50 hover:text-apple-blue transition-colors">Portfolio</a></li>
-              <li><a href="#pricing" className="text-sm text-white/50 hover:text-apple-blue transition-colors">Pricing</a></li>
-              <li><a href="#contact" className="text-sm text-white/50 hover:text-apple-blue transition-colors">Contact</a></li>
+              <li><a href="/about" className="text-sm text-white/50 hover:text-apple-blue transition-colors">About Us</a></li>
+              <li><a href="/work" className="text-sm text-white/50 hover:text-apple-blue transition-colors">Portfolio & Case Studies</a></li>
+              <li><a href="/quote" className="text-sm text-white/50 hover:text-apple-blue transition-colors">Quote Builder</a></li>
+              <li><a href="/contact" className="text-sm text-white/50 hover:text-apple-blue transition-colors">Contact</a></li>
               <li><a href={`mailto:${email1}`} className="text-sm text-white/50 hover:text-apple-blue transition-colors">{email1}</a></li>
               <li><a href={`mailto:${email2}`} className="text-sm text-white/50 hover:text-apple-blue transition-colors">{email2}</a></li>
               <li><a href="/admin" className="text-sm text-white/30 hover:text-apple-blue transition-colors text-xs">Admin Login</a></li>

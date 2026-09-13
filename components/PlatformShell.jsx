@@ -105,11 +105,15 @@ export function SiteFooter({ settings = {} }) {
         </div>
 
         <div>
-          <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-white/40">Contact</p>
-          <div className="space-y-3 text-sm text-white/65">
-            <a href={`mailto:${settings.company_email || 'anjalventures@gmail.com'}`} className="flex items-center gap-2 rounded-lg transition hover:text-white">
-              <Mail className="h-4 w-4" />
-              {settings.company_email || 'anjalventures@gmail.com'}
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-white/40">Official Communications</p>
+          <div className="space-y-2.5 text-sm text-white/65">
+            <a href="mailto:contact@anjalventures.com" className="flex items-center gap-2 rounded-lg transition hover:text-white">
+              <Mail className="h-4 w-4 text-emerald-400" />
+              <span>contact@anjalventures.com</span>
+            </a>
+            <a href="mailto:developers@anjalventures.com" className="flex items-center gap-2 rounded-lg transition hover:text-white">
+              <Mail className="h-4 w-4 text-blue-400" />
+              <span>developers@anjalventures.com</span>
             </a>
             <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
               <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-white/35">

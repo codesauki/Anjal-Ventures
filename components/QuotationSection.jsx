@@ -100,7 +100,7 @@ export default function QuotationSection({ settings = {}, calculator = {} }) {
     const cacClean = String(settings.company_cac || '9258709').replace(/^BN\s*[:\-\s]?\s*/i, '')
     const dunsVal = settings.company_duns || '352294840'
     doc.text(`CAC: ${cacClean} | D-U-N-S: ${dunsVal} | TIN: ${settings.company_tin || '2623553716975'}`, textStartX, margin + 19)
-    doc.text(settings.company_email || 'anjalventures@gmail.com', textStartX, margin + 24)
+    doc.text(settings.company_email || 'contact@anjalventures.com', textStartX, margin + 24)
 
     // Quotation number and details on right side
     doc.setFont('helvetica', 'bold')
@@ -359,7 +359,7 @@ export default function QuotationSection({ settings = {}, calculator = {} }) {
     
     doc.setFontSize(6)
     doc.text(
-      `${settings.company_email || 'anjalventures@gmail.com'} • ${settings.company_phone || '+234 814 001 1111'} • ${settings.company_address || 'Damaturu, Nigeria'}`,
+      `${settings.company_email || 'contact@anjalventures.com'} • ${settings.company_email_dev || 'developers@anjalventures.com'} • ${settings.company_address || 'Damaturu, Yobe State, Nigeria'}`,
       pageWidth / 2,
       footerY + 10,
       { align: 'center' }

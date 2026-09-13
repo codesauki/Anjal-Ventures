@@ -51,7 +51,7 @@ export default function Navbar({ settings = {} }) {
 
             {/* CTAs */}
             <div className="hidden lg:flex items-center gap-3">
-              <a href={`mailto:${settings.company_email || 'anjalventures@gmail.com'}`}
+              <a href={`mailto:${settings.company_email || 'contact@anjalventures.com'}`}
                 className="px-5 py-2.5 text-sm font-medium text-gray-600 border border-gray-200 rounded-lg hover:border-gray-300 hover:bg-gray-50 transition-all">
                 Email
               </a>

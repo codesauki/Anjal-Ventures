@@ -94,7 +94,7 @@ export default function EstimatorAndQuotation({ settings = {}, calculator = {} }
       const cacClean = String(settings.company_cac || '9258709').replace(/^BN\s*[:\-\s]?\s*/i, '')
       const dunsVal = settings.company_duns || '352294840'
       doc.text(`CAC: ${cacClean} · D-U-N-S: ${dunsVal} · TIN: ${settings.company_tin || '2623553716975'}`, margin, 36)
-      doc.text(`${settings.company_email || 'anjalventures@gmail.com'} · ${settings.company_address || 'Damaturu, Yobe State, Nigeria'}`, margin, 43)
+      doc.text(`${settings.company_email || 'contact@anjalventures.com'} · ${settings.company_address || 'Damaturu, Yobe State, Nigeria'}`, margin, 43)
 
       doc.setFont('helvetica', 'bold')
       doc.setFontSize(11)
@@ -312,9 +312,9 @@ export default function EstimatorAndQuotation({ settings = {}, calculator = {} }
     doc.setFont('helvetica', 'normal')
     doc.setFontSize(7.5)
     doc.setTextColor(100, 116, 139)
-    doc.text(`Email: ${settings.company_email || 'anjalventures@gmail.com'}`, margin, y)
+    doc.text(`Email: ${settings.company_email || 'contact@anjalventures.com'}`, margin, y)
     y += 4
-    doc.text(`Phone: ${settings.company_phone || '+234 (0) 8 1400 11111'}`, margin, y)
+    doc.text(`Engineering: ${settings.company_email_dev || 'developers@anjalventures.com'}`, margin, y)
     y += 4
     doc.text(`Address: ${settings.company_address || 'Damaturu, Yobe State, Nigeria'}`, margin, y)
 

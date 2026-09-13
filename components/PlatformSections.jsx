@@ -20,6 +20,7 @@ import {
 } from 'lucide-react'
 import { formatMoney } from '@/lib/format'
 import { normalizeCacNumber } from '@/lib/company'
+import ProjectStoreBadges from '@/components/StoreBadges'
 
 const iconMap = {
   globe: Globe2,
@@ -155,6 +156,9 @@ export function ServicesGrid({ services = [] }) {
 }
 
 export function ProjectGrid({ projects = [], filter = 'all', title = 'Selected work', intro }) {
+  const appsCount = projects.filter(p => p.project_type === 'mobile-app').length
+  const websitesCount = projects.filter(p => p.project_type === 'website' || p.project_type === 'saas').length
+
   const filtered = projects.filter(project => {
     if (filter === 'all') return true
     if (filter === 'apps') return project.project_type === 'mobile-app'
@@ -163,23 +167,56 @@ export function ProjectGrid({ projects = [], filter = 'all', title = 'Selected w
   })
 
   return (
-    <section className="bg-slate-50 px-5 py-20 lg:px-8">
+    <section className="bg-slate-50 px-5 py-24 lg:px-8 border-t border-slate-200">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
-          <SectionIntro eyebrow="Portfolio" title={title} text={intro} />
-          <div className="flex flex-wrap gap-2">
-            <Link href="/work" className="rounded-lg border border-slate-300 px-3 py-2 text-sm font-semibold text-slate-700 hover:border-slate-950">All</Link>
-            <Link href="/work/apps" className="rounded-lg border border-slate-300 px-3 py-2 text-sm font-semibold text-slate-700 hover:border-slate-950">Apps</Link>
-            <Link href="/work/websites" className="rounded-lg border border-slate-300 px-3 py-2 text-sm font-semibold text-slate-700 hover:border-slate-950">Websites</Link>
+        <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Studio Portfolio</p>
+            <h2 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 md:text-4xl">{title}</h2>
+            {intro && <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-600">{intro}</p>}
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <Link
+              href="/work"
+              className={`rounded-xl px-4 py-2 text-xs font-bold transition ${
+                filter === 'all'
+                  ? 'bg-slate-950 text-white shadow-sm'
+                  : 'border border-slate-200 bg-white text-slate-700 hover:border-slate-400'
+              }`}
+            >
+              All Systems ({projects.length})
+            </Link>
+            <Link
+              href="/work/apps"
+              className={`rounded-xl px-4 py-2 text-xs font-bold transition ${
+                filter === 'apps'
+                  ? 'bg-slate-950 text-white shadow-sm'
+                  : 'border border-slate-200 bg-white text-slate-700 hover:border-slate-400'
+              }`}
+            >
+              Mobile Apps ({appsCount})
+            </Link>
+            <Link
+              href="/work/websites"
+              className={`rounded-xl px-4 py-2 text-xs font-bold transition ${
+                filter === 'websites'
+                  ? 'bg-slate-950 text-white shadow-sm'
+                  : 'border border-slate-200 bg-white text-slate-700 hover:border-slate-400'
+              }`}
+            >
+              Web & SaaS ({websitesCount})
+            </Link>
           </div>
         </div>
 
         {filtered.length === 0 ? (
-          <div className="rounded-lg border border-dashed border-slate-300 bg-white p-10 text-center text-slate-500">
-            Portfolio items will appear here after they are published from admin.
+          <div className="rounded-3xl border border-dashed border-slate-300 bg-white p-16 text-center text-slate-500">
+            <MonitorSmartphone className="mx-auto h-12 w-12 text-slate-300 mb-3" />
+            <p className="text-base font-semibold text-slate-950">No published projects in this category yet</p>
+            <p className="mt-1 text-sm text-slate-500">Case studies will appear here once published from the admin panel.</p>
           </div>
         ) : (
-          <div className="grid gap-5 md:grid-cols-2">
+          <div className="grid gap-8 md:grid-cols-2">
             {filtered.map(project => (
               <ProjectCard key={project.id} project={project} />
             ))}
@@ -195,36 +232,134 @@ export function ProjectCard({ project }) {
   const portrait = media.filter(item => item.orientation === 'portrait').slice(0, 4)
   const primary = media.find(item => item.is_primary) || media[0]
   const href = `/work/${project.slug || project.id}`
+  const hasStores = Boolean(project.app_store_url || project.play_store_url)
+  const isApp = project.project_type === 'mobile-app'
 
   return (
-    <Link href={href} className="group overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:border-slate-300 hover:shadow-lg">
-      <div className="relative min-h-[260px] bg-slate-100">
-        {project.project_type === 'mobile-app' && portrait.length > 0 ? (
-          <div className="grid h-full min-h-[280px] grid-cols-4 gap-3 bg-slate-950 p-5">
-            {portrait.map(item => (
-              <div key={item.id} className="relative overflow-hidden rounded-lg bg-white">
-                <img src={item.url} alt={item.alt || project.title} className="h-full w-full object-cover" />
+    <Link href={href} className="group flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xs transition duration-300 hover:-translate-y-1.5 hover:border-slate-300 hover:shadow-xl">
+      <div>
+        {/* Device Frame Staging */}
+        <div className="relative overflow-hidden bg-slate-950">
+          {isApp ? (
+            /* Smartphone Multi-Screen Device Mockup Frame */
+            <div className="relative min-h-[300px] p-6 bg-gradient-to-b from-slate-900 to-slate-950">
+              <div className="mb-3 flex items-center justify-between text-[11px] font-mono text-white/40">
+                <span className="flex items-center gap-1.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  iOS & Android Builds
+                </span>
+                <span>Production Release</span>
               </div>
-            ))}
-          </div>
-        ) : primary?.url ? (
-          <img src={primary.url} alt={primary.alt || project.title} className="h-[280px] w-full object-cover transition duration-500 group-hover:scale-105" />
-        ) : (
-          <div className="flex h-[280px] items-center justify-center bg-slate-950 text-white">
-            <MonitorSmartphone className="h-14 w-14 text-white/55" />
-          </div>
-        )}
-      </div>
-      <div className="p-6">
-        <div className="mb-4 flex items-center justify-between gap-3">
-          <span className="rounded-md bg-blue-50 px-2.5 py-1 text-xs font-bold text-blue-700">{project.project_type || 'website'}</span>
-          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">{project.status || 'Live'}</span>
+              {portrait.length > 0 ? (
+                <div className="grid grid-cols-4 gap-2.5">
+                  {portrait.map((item, idx) => (
+                    <div
+                      key={item.id || idx}
+                      className="relative aspect-[9/19] overflow-hidden rounded-xl border border-white/20 bg-slate-800 shadow-lg transition duration-500 group-hover:scale-103"
+                    >
+                      <img src={item.url} alt={item.alt || project.title} className="h-full w-full object-cover" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                    </div>
+                  ))}
+                </div>
+              ) : primary?.url ? (
+                <div className="mx-auto max-w-xs aspect-[9/16] overflow-hidden rounded-2xl border-2 border-white/20 bg-slate-800 shadow-2xl">
+                  <img src={primary.url} alt={primary.alt || project.title} className="h-full w-full object-cover" />
+                </div>
+              ) : (
+                <div className="flex h-56 items-center justify-center text-white/40">
+                  <Smartphone className="h-12 w-12" />
+                </div>
+              )}
+            </div>
+          ) : (
+            /* Browser Viewport Chrome Mockup */
+            <div className="relative bg-slate-900">
+              <div className="flex items-center justify-between border-b border-white/10 bg-slate-950 px-4 py-2.5">
+                <div className="flex items-center gap-1.5">
+                  <span className="h-2.5 w-2.5 rounded-full bg-rose-500/80" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-amber-500/80" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/80" />
+                </div>
+                <div className="rounded-md border border-white/10 bg-white/5 px-3 py-0.5 text-[10px] font-mono text-white/50">
+                  {project.url ? project.url.replace(/^https?:\/\//, '') : `${project.slug || 'system'}.anjalventures.com`}
+                </div>
+                <div className="w-10" />
+              </div>
+              <div className="relative aspect-[16/9] overflow-hidden bg-slate-950">
+                {primary?.url ? (
+                  <img
+                    src={primary.url}
+                    alt={primary.alt || project.title}
+                    className="h-full w-full object-cover transition duration-500 group-hover:scale-103"
+                  />
+                ) : (
+                  <div className="flex h-full items-center justify-center text-white/40">
+                    <MonitorSmartphone className="h-14 w-14" />
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
         </div>
-        <h3 className="text-2xl font-semibold tracking-normal text-slate-950">{project.title}</h3>
-        <p className="mt-3 line-clamp-2 text-sm leading-6 text-slate-600">{project.summary || project.description}</p>
-        <div className="mt-6 flex items-center gap-2 text-sm font-bold text-slate-950">
-          View case study
-          <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+
+        {/* Project Information */}
+        <div className="p-7">
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <span className="rounded-md bg-slate-100 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-slate-800">
+                {project.project_type || 'Platform'}
+              </span>
+              {project.industry && (
+                <span className="rounded-md border border-slate-200 px-2 py-0.5 text-[11px] font-semibold text-slate-500">
+                  {project.industry}
+                </span>
+              )}
+            </div>
+            <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-400 uppercase tracking-wider">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              {project.status || 'Live'}
+            </span>
+          </div>
+
+          <h3 className="text-2xl font-semibold tracking-tight text-slate-950 group-hover:text-blue-600 transition-colors">
+            {project.title}
+          </h3>
+          <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-slate-600">
+            {project.summary || project.description}
+          </p>
+
+          {/* Tags */}
+          {(project.tags || []).length > 0 && (
+            <div className="mt-5 flex flex-wrap gap-1.5">
+              {project.tags.slice(0, 4).map(t => (
+                <span key={t} className="rounded-md bg-slate-50 border border-slate-200/80 px-2 py-0.5 font-mono text-[10px] text-slate-600">
+                  {t}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Footer & Store Badges Action Bar */}
+      <div className="border-t border-slate-100 px-7 py-4.5 bg-slate-50/40">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          {hasStores ? (
+            <ProjectStoreBadges
+              appStoreUrl={project.app_store_url}
+              playStoreUrl={project.play_store_url}
+              stopPropagation={true}
+            />
+          ) : (
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
+              {project.client_name ? `Client: ${project.client_name}` : 'Enterprise Platform'}
+            </div>
+          )}
+          <div className="flex items-center gap-1.5 text-xs font-bold text-slate-950 transition group-hover:text-blue-600 ml-auto">
+            <span>Case study</span>
+            <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
+          </div>
         </div>
       </div>
     </Link>
