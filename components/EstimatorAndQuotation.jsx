@@ -91,8 +91,9 @@ export default function EstimatorAndQuotation({ settings = {}, calculator = {} }
       doc.setFont('helvetica', 'normal')
       doc.setFontSize(9)
       doc.setTextColor(200, 210, 220)
-      doc.text(settings.company_tagline || "Building Africa's Digital Infrastructure", margin, 29)
-      doc.text(`CAC: ${settings.company_cac || 'BN 9258709'} · TIN: ${settings.company_tin || '2623553716975'}`, margin, 36)
+      const cacClean = String(settings.company_cac || '9258709').replace(/^BN\s*[:\-\s]?\s*/i, '')
+      const dunsVal = settings.company_duns || '352294840'
+      doc.text(`CAC: ${cacClean} · D-U-N-S: ${dunsVal} · TIN: ${settings.company_tin || '2623553716975'}`, margin, 36)
       doc.text(`${settings.company_email || 'anjalventures@gmail.com'} · ${settings.company_address || 'Damaturu, Yobe State, Nigeria'}`, margin, 43)
 
       doc.setFont('helvetica', 'bold')

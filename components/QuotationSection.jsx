@@ -97,8 +97,9 @@ export default function QuotationSection({ settings = {}, calculator = {} }) {
     doc.setFont('helvetica', 'normal')
     doc.setFontSize(7.5)
     doc.setTextColor(148, 163, 184)
-    doc.text(settings.company_tagline || "Building Africa's Digital Infrastructure", textStartX, margin + 14)
-    doc.text(`CAC: ${settings.company_cac || 'BN 9258709'} | TIN: ${settings.company_tin || '2623553716975'}`, textStartX, margin + 19)
+    const cacClean = String(settings.company_cac || '9258709').replace(/^BN\s*[:\-\s]?\s*/i, '')
+    const dunsVal = settings.company_duns || '352294840'
+    doc.text(`CAC: ${cacClean} | D-U-N-S: ${dunsVal} | TIN: ${settings.company_tin || '2623553716975'}`, textStartX, margin + 19)
     doc.text(settings.company_email || 'anjalventures@gmail.com', textStartX, margin + 24)
 
     // Quotation number and details on right side

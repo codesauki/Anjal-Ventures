@@ -19,6 +19,7 @@ import {
   Sparkles,
 } from 'lucide-react'
 import { formatMoney } from '@/lib/format'
+import { normalizeCacNumber } from '@/lib/company'
 
 const iconMap = {
   globe: Globe2,
@@ -41,6 +42,16 @@ export function SectionIntro({ eyebrow, title, text, align = 'left' }) {
 }
 
 export function Hero({ settings = {} }) {
+  const cacNum = normalizeCacNumber(settings.company_cac)
+  const dunsNum = settings.company_duns || '352294840'
+  const defaultBadge = `CAC Registered: ${cacNum} · D-U-N-S: ${dunsNum} · Active`
+  const badge = settings.hero_badge && !settings.hero_badge.includes('BN') ? settings.hero_badge : defaultBadge
+  const title = settings.hero_title || 'We build the digital products businesses actually use.'
+  const description =
+    settings.hero_description ||
+    'From websites and mobile apps to marketplaces, SaaS platforms, digital automations and internal systems, Anjal Ventures turns ideas into working digital products for individuals, businesses and organisations — designed, built and maintained from Nigeria.'
+  const tagline = settings.hero_tagline || 'Built for people. Built for businesses. Built to work.'
+
   return (
     <section className="relative overflow-hidden border-b border-slate-200 bg-slate-950 text-white">
       <div className="absolute inset-0">
@@ -49,14 +60,18 @@ export function Hero({ settings = {} }) {
       </div>
       <div className="relative mx-auto grid min-h-[calc(100vh-80px)] max-w-7xl items-center gap-12 px-5 py-20 lg:grid-cols-[1.05fr_.95fr] lg:px-8">
         <div>
-          <p className="mb-6 inline-flex rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-blue-100">
-            {settings.hero_badge || 'Product studio / Cloud platforms / Mobile apps'}
+          <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1.5 text-xs font-semibold tracking-wider text-emerald-300">
+            <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+            {badge}
           </p>
-          <h1 className="max-w-4xl text-5xl font-semibold leading-[1.02] tracking-normal md:text-7xl">
-            Enterprise digital products for ambitious African companies.
+          <h1 className="max-w-4xl text-5xl font-semibold leading-[1.04] tracking-tight md:text-7xl">
+            {title}
           </h1>
-          <p className="mt-7 max-w-2xl text-lg leading-8 text-white/70">
-            Anjal Ventures designs and ships premium websites, mobile apps, SaaS platforms, AI workflows, and internal systems with the discipline of a modern product studio.
+          <p className="mt-7 max-w-2xl text-lg leading-8 text-white/75">
+            {description}
+          </p>
+          <p className="mt-4 text-base font-semibold tracking-wide text-blue-200/90 md:text-lg">
+            {tagline}
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Link href="/app-studio" className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-blue-50">

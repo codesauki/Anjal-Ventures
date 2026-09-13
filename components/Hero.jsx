@@ -27,7 +27,7 @@ export default function Hero({ settings = {} }) {
   }, [])
 
   const companyName = settings.company_name || 'Anjal Ventures'
-  const badge = settings.hero_badge || 'CAC Registered · BN 9258709 · Active'
+  const badge = settings.hero_badge || 'CAC Registered: 9258709 · D-U-N-S: 352294840 · Active'
   const startingPrice = settings.stats_starting_price || '100'
   const statsServices = settings.stats_services || '6'
   const statsProjects = settings.stats_smes || '42'
@@ -106,7 +106,7 @@ export default function Hero({ settings = {} }) {
               <div className="flex items-center gap-3 p-4 rounded-xl" style={{ background: 'rgba(201,168,76,0.1)', border: '1px solid rgba(201,168,76,0.2)' }}>
                 <span className="text-lg">🏛️</span>
                 <span className="text-xs text-brand-gold">
-                  CAC Registered · BN 9258709 · TIN 2623553716975 · Damaturu, Yobe State, Nigeria
+                  CAC Registered: 9258709 · D-U-N-S: 352294840 · TIN 2623553716975 · Damaturu, Yobe State, Nigeria
                 </span>
               </div>
             </div>

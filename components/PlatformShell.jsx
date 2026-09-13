@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, Mail, MapPin, Menu, MessageCircle, X } from 'lucide-react'
 import { useState } from 'react'
-import { normalizeCompanyAddress } from '@/lib/company'
+import { normalizeCompanyAddress, normalizeCacNumber } from '@/lib/company'
 
 const nav = [
   { href: '/services', label: 'Services' },
@@ -89,7 +89,7 @@ export function SiteFooter({ settings = {} }) {
             </span>
             <div>
               <p className="font-bold">{settings.company_name || 'Anjal Ventures'}</p>
-              <p className="text-xs text-white/45">{settings.company_cac || 'BN 9258709'}</p>
+              <p className="text-xs text-white/45">CAC: {normalizeCacNumber(settings.company_cac)} · D-U-N-S: {settings.company_duns || '352294840'}</p>
             </div>
           </div>
           <p className="max-w-md text-sm leading-6 text-white/60">

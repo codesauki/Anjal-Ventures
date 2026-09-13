@@ -2,7 +2,8 @@
 
 export default function About({ settings = {} }) {
   const aboutText = settings.about_text || 'Anjal Ventures is a registered Nigerian technology enterprise delivering world-class digital solutions to businesses, institutions, and organisations across Nigeria and the African continent.'
-  const cac = settings.company_cac || 'BN 9258709'
+  const cac = (settings.company_cac || '9258709').replace(/^BN\s*[:\-\s]?\s*/i, '')
+  const duns = settings.company_duns || '352294840'
   const tin = settings.company_tin || '2623553716975'
   const address = settings.company_address || 'No. 4, MJG Global Ventures Complex, Kolomi Ali Street, Sabon Pegi, Damaturu, Yobe State, Nigeria'
 
@@ -50,7 +51,7 @@ export default function About({ settings = {} }) {
               <div>
                 <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">Registration Details</div>
                 <div className="space-y-3">
-                  {[['CAC BN', cac], ['TIN', tin], ['Status', 'Active']].map(([k, v]) => (
+                  {[['CAC Registration', cac], ['D-U-N-S', duns], ['TIN', tin], ['Status', 'Active']].map(([k, v]) => (
                     <div key={k} className="flex justify-between items-center pb-3 border-b border-gray-200 last:pb-0 last:border-0">
                       <span className="text-sm text-gray-600">{k}</span>
                       <span className="text-sm font-semibold text-black font-mono">{v}</span>
