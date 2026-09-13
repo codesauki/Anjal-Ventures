@@ -90,9 +90,9 @@ export default function AdminLogin() {
                 <input
                   type="email"
                   className="w-full bg-transparent text-sm outline-none"
-                  placeholder="owner@anjalventures.com"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
+                  autoComplete="email"
                 />
               </span>
             </label>

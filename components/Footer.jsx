@@ -75,7 +75,6 @@ export function Footer({ settings = {} }) {
               <li><a href="/contact" className="text-sm text-white/50 hover:text-apple-blue transition-colors">Contact</a></li>
               <li><a href={`mailto:${email1}`} className="text-sm text-white/50 hover:text-apple-blue transition-colors">{email1}</a></li>
               <li><a href={`mailto:${email2}`} className="text-sm text-white/50 hover:text-apple-blue transition-colors">{email2}</a></li>
-              <li><a href="/admin" className="text-sm text-white/30 hover:text-apple-blue transition-colors text-xs">Admin Login</a></li>
             </ul>
           </div>
         </div>
