@@ -6,9 +6,9 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 export const metadata = {
-  title: 'Mobile Applications Portfolio - Anjal Ventures',
+  title: 'Mobile Applications Portfolio | Anjal Solutions LTD',
   description:
-    'Production iOS and Android applications engineered by Anjal Ventures with Apple App Store and Google Play deployments.',
+    'Production iOS and Android applications engineered by Anjal Solutions LTD with Apple App Store and Google Play deployments.',
 }
 
 export default async function AppsWorkPage() {

@@ -23,11 +23,16 @@ export function SiteHeader({ settings = {} }) {
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8">
         <Link href="/" className="flex min-w-0 items-center gap-3">
           <span className="relative h-10 w-10 overflow-hidden rounded-lg border border-slate-200 bg-white">
-            <Image src="/logo.png" alt="Anjal Ventures" fill className="object-contain p-1.5" />
+            <Image src="/logo.png" alt="Anjal Solutions LTD" fill className="object-contain p-1.5" />
           </span>
           <span className="min-w-0">
-            <span className="block text-sm font-bold tracking-normal text-slate-950">{settings.company_name || 'Anjal Ventures'}</span>
-            <span className="hidden text-xs text-slate-500 sm:block">Product studio and digital infrastructure</span>
+            <span className="flex items-center gap-2 flex-wrap">
+              <span className="block text-sm font-bold tracking-normal text-slate-950">{settings.company_name || 'Anjal Solutions LTD'}</span>
+              <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-medium text-slate-600 border border-slate-200">
+                (formerly Anjal Ventures)
+              </span>
+            </span>
+            <span className="hidden text-xs text-slate-500 sm:block">Digital products and software engineering</span>
           </span>
         </Link>
 
@@ -78,6 +83,8 @@ export function SiteFooter({ settings = {} }) {
   const whatsappNumber = settings.company_whatsapp || settings.company_phone || '2348164135836'
   const whatsappUrl = `https://wa.me/${String(whatsappNumber).replace(/[^0-9]/g, '')}`
   const address = normalizeCompanyAddress(settings.company_address)
+  const cac = normalizeCacNumber(settings.company_cac)
+  const tin = settings.company_tin || '2623598796685'
 
   return (
     <footer className="border-t border-slate-200 bg-slate-950 text-white">
@@ -85,16 +92,30 @@ export function SiteFooter({ settings = {} }) {
         <div>
           <div className="mb-5 flex items-center gap-3">
             <span className="relative h-10 w-10 overflow-hidden rounded-lg bg-white">
-              <Image src="/logo.png" alt="Anjal Ventures" fill className="object-contain p-1.5" />
+              <Image src="/logo.png" alt="Anjal Solutions LTD" fill className="object-contain p-1.5" />
             </span>
             <div>
-              <p className="font-bold">{settings.company_name || 'Anjal Ventures'}</p>
-              <p className="text-xs text-white/45">CAC: {normalizeCacNumber(settings.company_cac)} · D-U-N-S: {settings.company_duns || '352294840'}</p>
+              <div className="flex items-center gap-2 flex-wrap">
+                <p className="font-bold">{settings.company_name || 'Anjal Solutions LTD'}</p>
+                <span className="text-[11px] text-white/50">(formerly Anjal Ventures)</span>
+              </div>
+              <p className="text-xs text-white/45">RC: {cac} · TIN: {tin}</p>
             </div>
           </div>
           <p className="max-w-md text-sm leading-6 text-white/60">
-            {settings.footer_tagline || 'Premium digital products from Damaturu to the world.'}
+            {settings.footer_tagline || 'Dependable digital products from Damaturu to the world.'}
           </p>
+          <div className="mt-4">
+            <a
+              href="/docs/certificate-anjal-solutions-ltd.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-md border border-emerald-500/40 bg-emerald-500/10 px-3 py-1.5 text-xs font-semibold text-emerald-300 hover:bg-emerald-500/20 transition"
+            >
+              <span>Verified Certificate of Incorporation (RC: {cac})</span>
+              <ArrowRight className="h-3.5 w-3.5" />
+            </a>
+          </div>
         </div>
 
         <div>
@@ -107,13 +128,13 @@ export function SiteFooter({ settings = {} }) {
         <div>
           <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-white/40">Official Communications</p>
           <div className="space-y-2.5 text-sm text-white/65">
-            <a href="mailto:contact@anjalventures.com" className="flex items-center gap-2 rounded-lg transition hover:text-white">
+            <a href={`mailto:${settings.company_email || 'contact@anjalventures.com'}`} className="flex items-center gap-2 rounded-lg transition hover:text-white">
               <Mail className="h-4 w-4 text-emerald-400" />
-              <span>contact@anjalventures.com</span>
+              <span>{settings.company_email || 'contact@anjalventures.com'}</span>
             </a>
-            <a href="mailto:developers@anjalventures.com" className="flex items-center gap-2 rounded-lg transition hover:text-white">
+            <a href={`mailto:${settings.company_email2 || 'developers@anjalventures.com'}`} className="flex items-center gap-2 rounded-lg transition hover:text-white">
               <Mail className="h-4 w-4 text-blue-400" />
-              <span>developers@anjalventures.com</span>
+              <span>{settings.company_email2 || 'developers@anjalventures.com'}</span>
             </a>
             <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
               <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-white/35">

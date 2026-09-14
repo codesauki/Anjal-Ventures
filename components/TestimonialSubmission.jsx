@@ -56,7 +56,7 @@ export default function TestimonialSubmission() {
             Let Others Know Your Story
           </h2>
           <p className="text-lg text-apple-space-gray font-light">
-            Your feedback helps other businesses discover us. Share your experience working with Anjal Ventures.
+            Your feedback helps other businesses discover us. Share your experience working with Anjal Solutions LTD.
           </p>
         </div>
 

@@ -4,8 +4,8 @@ import Contact from '@/components/Contact'
 import { getPlatformData } from '@/lib/platform-data'
 
 export const metadata = {
-  title: 'Contact Engineering & Partnerships - Anjal Ventures',
-  description: 'Connect directly with Anjal Ventures engineering and corporate leadership. Official communication channels for digital systems, cloud platforms, and mobile products.',
+  title: 'Contact Engineering & Partnerships - Anjal Solutions LTD',
+  description: 'Connect directly with Anjal Solutions LTD (formerly Anjal Ventures). Official communication channels for software systems, web platforms, and mobile products.',
 }
 
 export default async function ContactPage() {
@@ -16,10 +16,13 @@ export default async function ContactPage() {
       <section className="border-b border-slate-200 bg-white px-5 py-20 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <p className="mb-4 text-xs font-bold uppercase tracking-[0.22em] text-slate-500">Corporate & Technical Inquiries</p>
-          <h1 className="max-w-4xl text-5xl font-semibold tracking-normal text-slate-950 md:text-7xl">
-            Talk to Anjal Ventures about your next system.
+          <h1 className="max-w-4xl text-4xl font-semibold tracking-normal text-slate-950 md:text-6xl">
+            Talk to Anjal Solutions LTD about your next system.
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
+          <p className="mt-4 text-sm font-medium text-blue-700">
+            Formerly Anjal Ventures · RC: 9854225
+          </p>
+          <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-600">
             Direct communication channels for corporate clients, enterprise partnerships, and engineering collaborations.
           </p>
         </div>

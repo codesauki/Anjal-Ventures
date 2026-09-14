@@ -44,14 +44,14 @@ export function SectionIntro({ eyebrow, title, text, align = 'left' }) {
 
 export function Hero({ settings = {} }) {
   const cacNum = normalizeCacNumber(settings.company_cac)
-  const dunsNum = settings.company_duns || '352294840'
-  const defaultBadge = `CAC Registered: ${cacNum} · D-U-N-S: ${dunsNum} · Active`
-  const badge = settings.hero_badge && !settings.hero_badge.includes('BN') ? settings.hero_badge : defaultBadge
-  const title = settings.hero_title || 'We build the digital products businesses actually use.'
+  const tinNum = settings.company_tin || '2623598796685'
+  const defaultBadge = `RC: ${cacNum} · TIN: ${tinNum}`
+  const badge = settings.hero_badge && !settings.hero_badge.includes('BN') && !settings.hero_badge.includes('9258709') && !settings.hero_badge.includes('D-U-N-S') && !settings.hero_badge.includes('352294840') ? settings.hero_badge : defaultBadge
+  const title = settings.hero_title || 'We build software and digital platforms that businesses rely on.'
   const description =
     settings.hero_description ||
-    'From websites and mobile apps to marketplaces, SaaS platforms, digital automations and internal systems, Anjal Ventures turns ideas into working digital products for individuals, businesses and organisations — designed, built and maintained from Nigeria.'
-  const tagline = settings.hero_tagline || 'Built for people. Built for businesses. Built to work.'
+    'From custom web platforms and mobile applications to business management systems and practical automation, Anjal Solutions LTD turns real business ideas into dependable digital products. Built and maintained from Nigeria.'
+  const tagline = settings.hero_tagline || 'Simple to use. Built to last. Ready to grow.'
 
   return (
     <section className="relative overflow-hidden border-b border-slate-200 bg-slate-950 text-white">
@@ -282,7 +282,7 @@ export function ProjectCard({ project }) {
                   <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/80" />
                 </div>
                 <div className="rounded-md border border-white/10 bg-white/5 px-3 py-0.5 text-[10px] font-mono text-white/50">
-                  {project.url ? project.url.replace(/^https?:\/\//, '') : `${project.slug || 'system'}.anjalventures.com`}
+                  {project.url ? project.url.replace(/^https?:\/\//, '') : `${project.slug || 'system'}.anjalsolutions.com`}
                 </div>
                 <div className="w-10" />
               </div>

@@ -22,7 +22,7 @@ export default function CaseStudiesSection() {
       ],
       technologies: ['Next.js', 'Stripe API', 'PostgreSQL', 'Redis'],
       testimonial: '"Anjal transformed our business. We went from struggling to scaling."',
-      testimonialAuthor: '— Chioma Okeke, CEO'
+      testimonialAuthor: 'Chioma Okeke, CEO'
     },
     {
       id: 2,
@@ -39,7 +39,7 @@ export default function CaseStudiesSection() {
       ],
       technologies: ['React Native', 'Firebase', 'Node.js', 'JWT Auth'],
       testimonial: '"They delivered a world-class app that our customers love."',
-      testimonialAuthor: '— Ibrahim Hassan, Founder'
+      testimonialAuthor: 'Ibrahim Hassan, Founder'
     },
     {
       id: 3,
@@ -56,7 +56,7 @@ export default function CaseStudiesSection() {
       ],
       technologies: ['Python', 'TensorFlow', 'React', 'PostgreSQL'],
       testimonial: '"Data-driven decisions are now instant. This is a game-changer."',
-      testimonialAuthor: '— Musa Abdullahi, Operations Manager'
+      testimonialAuthor: 'Musa Abdullahi, Operations Manager'
     },
     {
       id: 4,
@@ -73,7 +73,7 @@ export default function CaseStudiesSection() {
       ],
       technologies: ['Next.js', 'Node.js', 'MongoDB', 'Stripe'],
       testimonial: '"They understood HR needs and built the perfect solution."',
-      testimonialAuthor: '— Dr. Amina Ahmed, CEO'
+      testimonialAuthor: 'Dr. Amina Ahmed, CEO'
     }
   ]
 

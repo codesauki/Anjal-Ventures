@@ -46,7 +46,7 @@ export default function AdminQuotations() {
                 <button onClick={() => setExpanded(expanded === q.id ? null : q.id)} className="flex w-full items-start justify-between gap-4 text-left">
                   <div>
                     <div className="mb-2 flex flex-wrap gap-2">
-                      <span className="rounded-md bg-blue-50 px-2 py-1 text-xs font-bold text-blue-700">{q.reference || `AV-${q.id}`}</span>
+                      <span className="rounded-md bg-blue-50 px-2 py-1 text-xs font-bold text-blue-700">{q.reference || `AS-${q.id}`}</span>
                       <span className="rounded-md bg-slate-100 px-2 py-1 text-xs font-bold text-slate-600">{q.quote_type || 'project'}</span>
                       <span className="rounded-md bg-slate-100 px-2 py-1 text-xs font-bold text-slate-600">{q.status || 'new'}</span>
                     </div>
@@ -79,7 +79,7 @@ export default function AdminQuotations() {
                       </div>
                     </div>
                     <div className="mt-4 flex flex-wrap gap-2">
-                      {q.email && <a href={`mailto:${q.email}?subject=Your Anjal Ventures Proposal`} className="inline-flex items-center gap-2 rounded-lg bg-slate-950 px-4 py-2 text-sm font-bold text-white"><Mail className="h-4 w-4" />Email</a>}
+                      {q.email && <a href={`mailto:${q.email}?subject=Your Anjal Solutions Proposal`} className="inline-flex items-center gap-2 rounded-lg bg-slate-950 px-4 py-2 text-sm font-bold text-white"><Mail className="h-4 w-4" />Email</a>}
                       {q.phone && <a href={`https://wa.me/${String(q.phone).replace(/[^0-9]/g, '')}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-lg bg-emerald-700 px-4 py-2 text-sm font-bold text-white"><MessageCircle className="h-4 w-4" />WhatsApp</a>}
                       <button onClick={() => remove(q.id)} className="inline-flex items-center gap-2 rounded-lg bg-red-50 px-4 py-2 text-sm font-bold text-red-700"><Trash2 className="h-4 w-4" />Delete</button>
                     </div>

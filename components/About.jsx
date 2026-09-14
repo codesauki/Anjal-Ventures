@@ -1,11 +1,10 @@
-'use client'
+import { normalizeCompanyAddress, normalizeCacNumber } from '@/lib/company'
 
 export default function About({ settings = {} }) {
-  const aboutText = settings.about_text || 'Anjal Ventures is a registered Nigerian technology enterprise delivering world-class digital solutions to businesses, institutions, and organisations across Nigeria and the African continent.'
-  const cac = (settings.company_cac || '9258709').replace(/^BN\s*[:\-\s]?\s*/i, '')
-  const duns = settings.company_duns || '352294840'
-  const tin = settings.company_tin || '2623553716975'
-  const address = settings.company_address || 'No. 4, MJG Global Ventures Complex, Kolomi Ali Street, Sabon Pegi, Damaturu, Yobe State, Nigeria'
+  const aboutText = settings.about_text || 'Anjal Solutions LTD (formerly Anjal Ventures) is an incorporated Nigerian technology company delivering dependable digital solutions to businesses, institutions, and organisations across Nigeria and internationally.'
+  const cac = normalizeCacNumber(settings.company_cac)
+  const tin = settings.company_tin || '2623598796685'
+  const address = normalizeCompanyAddress(settings.company_address)
 
   return (
     <section id="about" className="section bg-gradient-to-r from-apple-light via-white to-apple-light py-24">
@@ -14,16 +13,16 @@ export default function About({ settings = {} }) {
           {/* Left side - Content */}
           <div>
             <div className="inline-block mb-4 px-4 py-2 rounded-full text-xs font-semibold text-apple-blue bg-blue-50 border border-blue-100">
-              → About Anjal Ventures
+              About Anjal Solutions LTD (formerly Anjal Ventures)
             </div>
-            <h2 className="text-5xl md:text-6xl font-semibold text-apple-dark mb-8">
+            <h2 className="text-4xl md:text-5xl font-semibold text-apple-dark mb-8">
               Technology Partner for African Businesses
             </h2>
             <p className="text-lg text-apple-space-gray leading-relaxed mb-6 font-light">
               {aboutText}
             </p>
             <p className="text-base text-apple-space-gray leading-relaxed mb-12 font-light">
-              Headquartered in {address}, we are a first-mover technology provider focused on delivering world-class digital solutions that are accessible to every business across Africa.
+              Headquartered in {address}, we build practical, dependable digital solutions that help businesses grow and operate smoothly.
             </p>
 
             {/* Core values grid */}
@@ -31,7 +30,7 @@ export default function About({ settings = {} }) {
               {[
                 { title: 'Mission', desc: 'Delivering affordable, cutting-edge digital solutions that transform ideas into scalable technology.' },
                 { title: 'Vision', desc: 'Become a trusted pan-African technology partner for businesses and institutions.' },
-                { title: 'Quality', desc: 'World-class engineering standards applied to every project — no compromises.' },
+                { title: 'Quality', desc: 'High engineering standards applied to every project with careful attention to detail.' },
                 { title: 'Ownership', desc: 'Full code ownership transferred to clients. Zero vendor lock-in.' },
               ].map(v => (
                 <div key={v.title} className="p-6 rounded-xl bg-white border border-apple-light-secondary hover:bg-apple-light hover:border-apple-space-gray transition-all shadow-sm">
@@ -51,12 +50,22 @@ export default function About({ settings = {} }) {
               <div>
                 <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">Registration Details</div>
                 <div className="space-y-3">
-                  {[['CAC Registration', cac], ['D-U-N-S', duns], ['TIN', tin], ['Status', 'Active']].map(([k, v]) => (
+                  {[['CAC Registration', `RC ${cac}`], ['TIN', tin], ['Status', 'Active (CAMA 2020)']].map(([k, v]) => (
                     <div key={k} className="flex justify-between items-center pb-3 border-b border-gray-200 last:pb-0 last:border-0">
                       <span className="text-sm text-gray-600">{k}</span>
                       <span className="text-sm font-semibold text-black font-mono">{v}</span>
                     </div>
                   ))}
+                </div>
+                <div className="mt-4 pt-3 border-t border-gray-200">
+                  <a
+                    href="/docs/certificate-anjal-solutions-ltd.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-semibold text-blue-600 hover:underline inline-flex items-center gap-1"
+                  >
+                    View Official CAC Certificate (PDF) →
+                  </a>
                 </div>
               </div>
 

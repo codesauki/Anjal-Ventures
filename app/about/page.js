@@ -1,14 +1,11 @@
 import Link from 'next/link'
 import {
   ArrowRight,
-  Award,
   Building2,
   CheckCircle2,
   Code2,
-  Cpu,
   FileCheck,
   Globe2,
-  Layers,
   Lock,
   Mail,
   MapPin,
@@ -18,173 +15,172 @@ import {
   ShieldCheck,
   Smartphone,
   Sparkles,
-  Terminal,
   Zap,
 } from 'lucide-react'
 import PlatformShell from '@/components/PlatformShell'
 import { CtaBand } from '@/components/PlatformSections'
 import { getPlatformData } from '@/lib/platform-data'
+import { normalizeCompanyAddress, normalizeCacNumber } from '@/lib/company'
 
 export const metadata = {
-  title: 'Studio Manifesto & Institutional Governance - Anjal Ventures',
+  title: 'About Us & Corporate Governance - Anjal Solutions LTD',
   description:
-    'The engineering manifesto, corporate governance, technical benchmarks, and regional heritage of Anjal Ventures. Registered Nigerian technology enterprise (CAC: 9258709 · D-U-N-S: 352294840).',
+    'About Anjal Solutions LTD (formerly Anjal Ventures). Incorporated Nigerian technology company (RC: 9854225, TIN: 2623598796685). Software engineering, web platforms, and mobile apps.',
 }
 
 const MANIFESTO_PILLARS = [
   {
     number: '01',
-    title: 'High-Conviction Engineering',
-    tagline: 'We reject fragile templates, low-code shortcuts, and throwaway prototypes.',
+    title: 'Solid Engineering Over Shortcuts',
+    tagline: 'We build systems meant to process real workloads day after day.',
     description:
-      'The modern web is inundated with fragile systems that look attractive on day one and disintegrate under genuine production loads. At Anjal Ventures, we architect every software system from first principles. We write typed, maintainable, and thoroughly tested code designed to process real transactions, handle peak user concurrency, and scale without compounding technical debt.',
+      'Too many digital products look great on launch day but fall apart when actual customers start using them. At Anjal Solutions LTD, we write clean, tested, and maintainable code. We focus on database integrity, speed, and real-world stability so your business never gets held back by technical debt.',
   },
   {
     number: '02',
-    title: 'Unconditional Code Ownership',
-    tagline: 'Zero proprietary vendor lock-in. Full intellectual property transfer.',
+    title: 'Complete Client Ownership',
+    tagline: 'You own your code, database, and designs. Zero vendor lock-in.',
     description:
-      'We believe software commissioned by a client should be fully owned by the client. Upon project handover, we transfer complete source code repositories, Figma design systems, database schemas, and cloud deployment runbooks. Your company retains 100% intellectual property rights, enabling your internal teams or future partners to operate, extend, or audit the system autonomously.',
+      'When you commission a system with us, it belongs to you. We hand over your source code repositories, design files, database structures, and deployment guides. Your team can run it, audit it, or hand it to other engineers whenever you choose.',
   },
   {
     number: '03',
-    title: 'Regional Roots, Global Benchmarks',
-    tagline: 'Pioneering world-class digital infrastructure from Damaturu, Yobe State.',
+    title: 'Grounded Roots, Global Standards',
+    tagline: 'Building dependable software from Damaturu, Yobe State.',
     description:
-      'Headquartered in Damaturu, Northern Nigeria, Anjal Ventures is living proof that tier-1 software engineering is not confined to legacy coastal tech hubs. We combine deep regional understanding with international technical standards, building resilient digital infrastructure that powers ambitious enterprises across Nigeria, Africa, and global markets.',
+      'Operating from Damaturu in Northern Nigeria, we combine hands-on knowledge of regional business realities with international engineering benchmarks. We build digital infrastructure that works reliably across diverse network conditions in Nigeria, Africa, and international markets.',
   },
   {
     number: '04',
-    title: 'Operational Longevity',
-    tagline: 'Software engineered to operate reliably for decades, not months.',
+    title: 'Long-Term Reliability',
+    tagline: 'Software built to run smoothly as your business grows.',
     description:
-      'A digital product is not a static marketing asset; it is an active operational machine. We engineer resilient database schemas, automated error recovery, comprehensive audit logging, and strict data validation into every layer of our stack. The systems we deploy are built to survive framework lifecycles and business pivots.',
+      'Good software is an operational backbone, not a one-off marketing exercise. We build with reliable database backups, clear logging, strong security practices, and sensible architectures that keep running month after month.',
   },
 ]
 
 const OPERATING_PRINCIPLES = [
   {
     icon: Code2,
-    title: 'Ownership & Sovereignty',
-    description: 'Clients should understand, own, and confidently operate every system we ship. We build assets, not dependencies.',
+    title: 'Code Ownership',
+    description: 'Clients receive full source code, database access, and documentation. You own the software you pay for.',
   },
   {
     icon: ShieldCheck,
-    title: 'Architectural Reliability',
-    description: 'Every build requires deliberate data models, failover redundancy, automated backups, and zero single points of failure.',
+    title: 'System Stability',
+    description: 'Sensible data models, automated backups, and clear error recovery built in from day one.',
   },
   {
     icon: Sparkles,
-    title: 'Aesthetic Restraint',
-    description: 'Luxury digital design is understated, precise, and functional. We favor typographic clarity over gratuitous decoration.',
+    title: 'Clean, Practical Design',
+    description: 'Clear layouts and straightforward user flows that help people complete tasks without confusion.',
   },
   {
     icon: Zap,
-    title: 'Engineering Velocity',
-    description: 'Rapid, disciplined iteration through modular component architecture, automated CI/CD pipelines, and continuous testing.',
+    title: 'Disciplined Delivery',
+    description: 'Milestone-based progress, clear sprint goals, and continuous testing throughout the build.',
   },
   {
     icon: Lock,
-    title: 'Defense-in-Depth',
-    description: 'Security is embedded at every layer: sanitized inputs, encrypted payloads, isolated environments, and strict RBAC.',
+    title: 'Built-in Security',
+    description: 'Encrypted connections, protected credentials, isolated environments, and strict role permissions.',
   },
   {
     icon: Scale,
-    title: 'Radical Transparency',
-    description: 'Honest architectural advice, transparent milestone billing, guaranteed deliverables, and zero hidden technical fees.',
+    title: 'Straightforward Communication',
+    description: 'Transparent milestone pricing, clear timelines, honest technical advice, and no surprise charges.',
   },
 ]
 
 const TECH_BENCHMARKS = [
   {
-    category: 'Frontend & UI Performance',
+    category: 'Web Platforms & Interfaces',
     icon: Globe2,
     specs: [
-      'Next.js 14 App Router with React Server Components (RSC)',
-      'Sub-second Largest Contentful Paint (LCP < 1.2s)',
-      'Zero layout shift (CLS < 0.05) & 95+ Core Web Vitals score',
-      'Atomic component architecture with strict Tailwind CSS tokens',
-      'Universal accessibility (WCAG 2.1 AA compliant typography & contrast)',
+      'Modern Next.js and React architecture with fast server rendering',
+      'Fast page load times optimized for desktop and mobile devices',
+      'Accessible typography, clear contrast, and intuitive navigation',
+      'Clean component library built for effortless maintenance',
+      'Proper search engine optimization (SEO) and social sharing previews',
     ],
   },
   {
-    category: 'Backend & Data Architecture',
+    category: 'Backend & Data Storage',
     icon: Server,
     specs: [
-      'PostgreSQL with Prisma ORM and optimized relational indexing',
-      'Redis in-memory caching for sub-millisecond query resolution',
-      'Idempotent webhook processing with cryptographic verification',
-      'Event-driven asynchronous queues for heavy computation & exports',
-      'Immutable database audit logging for financial and operational records',
+      'Relational PostgreSQL databases with indexed queries and relationships',
+      'Fast caching layers for frequent requests and queries',
+      'Secure payment webhooks with cryptographic verification',
+      'Audit logs for financial transactions and sensitive operations',
+      'Automated database backups and failover protection',
     ],
   },
   {
-    category: 'Mobile Engineering & App Store Approval',
+    category: 'Mobile Applications',
     icon: Smartphone,
     specs: [
-      'Production Flutter & React Native cross-platform codebases',
-      'Full compliance with Apple App Store Review & Google Play Policies',
-      'Biometric authentication (Face ID, Touch ID, Android Biometrics)',
-      'Offline-first SQLite caching with background state synchronization',
-      'Automated App Store Connect & Google Play Console release workflows',
+      'Cross-platform iOS and Android releases built with Flutter or React Native',
+      'Full alignment with Apple App Store and Google Play guidelines',
+      'Biometric login support (Face ID, Fingerprint)',
+      'Offline-first data handling for low-connectivity environments',
+      'Push notifications and release management pipelines',
     ],
   },
   {
-    category: 'Security, Cloud & DevOps',
+    category: 'Security & Cloud Operations',
     icon: Shield,
     specs: [
-      'End-to-end TLS 1.3 encryption and automated SSL provisioning',
-      'Strict Content Security Policy (CSP), CORS, and rate limiting',
-      'GitHub Actions automated CI/CD pipeline with pre-commit linters',
-      'Edge CDN caching via Cloudflare and Vercel Enterprise infrastructure',
-      'Real-time error tracking and telemetry via Sentry and Datadog',
+      'Encrypted SSL/TLS communication on every endpoint',
+      'Strict input sanitization, rate limiting, and CORS security policies',
+      'Automated continuous integration and deployment (CI/CD) pipelines',
+      'Edge content delivery network (CDN) caching for fast local delivery',
+      'Real-time error monitoring and uptime alerting',
     ],
   },
 ]
 
 export default async function AboutPage() {
   const { settings } = await getPlatformData()
-  const cac = (settings.company_cac || '9258709').replace(/^BN\s*[:\-\s]?\s*/i, '')
-  const duns = settings.company_duns || '352294840'
-  const tin = settings.company_tin || '2623553716975'
-  const address = settings.company_address || 'No. 4, MJG Global Ventures Complex, Kolomi Ali Street, Sabon Pegi, Damaturu, Yobe State, Nigeria'
+  const cac = normalizeCacNumber(settings.company_cac)
+  const tin = settings.company_tin || '2623598796685'
+  const address = normalizeCompanyAddress(settings.company_address)
   const emailContact = settings.company_email || 'contact@anjalventures.com'
-  const emailDev = settings.company_email_dev || 'developers@anjalventures.com'
+  const emailDev = settings.company_email2 || 'developers@anjalventures.com'
 
   return (
     <PlatformShell settings={settings}>
-      {/* 1. Obsidian Executive Hero */}
+      {/* 1. Hero */}
       <section className="relative overflow-hidden border-b border-slate-200 bg-slate-950 px-5 py-24 text-white lg:px-8">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-blue-950/40 via-slate-950 to-slate-950" />
         <div className="relative mx-auto max-w-7xl">
           <div className="flex flex-wrap items-center gap-3">
             <span className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-emerald-300">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              Studio Manifesto & Governance
+              Corporate Profile & Governance
             </span>
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-mono text-white/50">
-              CAC: {cac} · D-U-N-S: {duns}
+            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-mono text-white/70">
+              RC: {cac} · TIN: {tin}
             </span>
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-mono text-white/50">
-              Damaturu HQ · Global Delivery
+            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">
+              Damaturu HQ · Nigeria & Global
             </span>
           </div>
 
-          <h1 className="mt-8 max-w-5xl text-5xl font-semibold leading-[1.04] tracking-tight md:text-7xl">
-            A Nigerian product engineering studio building serious digital infrastructure.
+          <h1 className="mt-8 max-w-5xl text-4xl font-semibold leading-[1.08] tracking-tight md:text-6xl">
+            Software engineering and digital solutions built for real operations.
           </h1>
 
-          <p className="mt-8 max-w-3xl text-lg leading-relaxed text-white/75 md:text-xl">
-            Anjal Ventures is a registered Nigerian technology enterprise delivering institutional-grade web platforms, native mobile applications, and high-throughput cloud software. We exist to close the gap between visionary ambition and rock-solid software execution across Africa and international markets.
+          <p className="mt-8 max-w-3xl text-lg leading-relaxed text-white/80 md:text-xl">
+            Anjal Solutions LTD (formerly Anjal Ventures) is an incorporated Nigerian technology company. We build dependable web platforms, mobile applications, and business systems for companies, public institutions, and growing teams across Africa and internationally.
           </p>
 
-          {/* Quick Institutional Credentials Ribbon */}
+          {/* Institutional Credentials Ribbon */}
           <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {[
-              { label: 'Corporate Registration', value: `CAC #${cac}`, sub: 'Corporate Affairs Commission' },
-              { label: 'Global Registry', value: `D-U-N-S #${duns}`, sub: 'Dun & Bradstreet Verified' },
-              { label: 'Tax Identification', value: `TIN #${tin}`, sub: 'Federal Inland Revenue' },
-              { label: 'Headquarters', value: 'Damaturu, Yobe', sub: 'Northern Nigeria Core' },
+              { label: 'Corporate Registration', value: `RC #${cac}`, sub: 'Corporate Affairs Commission (CAMA 2020)' },
+              { label: 'Company Structure', value: 'Private Ltd', sub: 'Limited by Shares' },
+              { label: 'Tax Identification', value: `TIN #${tin}`, sub: 'Federal Inland Revenue Service' },
+              { label: 'Registered Office', value: 'Damaturu, Yobe', sub: 'No. 4, Kolomi Ali Street' },
             ].map((item, idx) => (
               <div
                 key={idx}
@@ -203,10 +199,10 @@ export default async function AboutPage() {
       <section className="border-b border-slate-200 bg-slate-50 px-5 py-8 lg:px-8">
         <div className="mx-auto grid max-w-7xl grid-cols-2 gap-6 md:grid-cols-4">
           {[
-            { metric: '40+', label: 'Shipped Systems', desc: 'Web portals, mobile apps & SaaS platforms deployed.' },
-            { metric: '100%', label: 'IP Ownership', desc: 'Complete source code and database rights transferred.' },
-            { metric: '99.9%', label: 'Uptime Reliability', desc: 'Engineered for continuous, multi-tenant operations.' },
-            { metric: '< 1.2s', label: 'Global Latency', desc: 'Sub-second web performance and instant edge caching.' },
+            { metric: '40+', label: 'Delivered Projects', desc: 'Web applications, mobile apps, and business systems.' },
+            { metric: '100%', label: 'Client Code Ownership', desc: 'Complete source code and database assets transferred.' },
+            { metric: '99.9%', label: 'Target Uptime', desc: 'Built for continuous, reliable business use.' },
+            { metric: '24h', label: 'Support Response', desc: 'Direct technical communication with engineering.' },
           ].map((item) => (
             <div key={item.label} className="border-l-2 border-slate-300 pl-4">
               <div className="text-3xl font-semibold tracking-tight text-slate-950 md:text-4xl">{item.metric}</div>
@@ -217,16 +213,16 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* 3. The Studio Manifesto ("Built to Operate") */}
+      {/* 3. The Studio Philosophy */}
       <section className="bg-white px-5 py-24 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-3xl">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">The Anjal Manifesto</p>
-            <h2 className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 md:text-5xl">
-              Built to operate. Why we reject throwaway software.
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Our Approach</p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 md:text-5xl">
+              Software engineered to last, not quick prototypes.
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-slate-600">
-              Most digital agencies treat software as temporary campaign collateral. At Anjal Ventures, we engineer digital systems as core capital assets. We build with the premise that software must survive real market stress, protect client data, and generate compounding value over years of operation.
+              Businesses rely on software to handle payments, manage stock, coordinate teams, and serve customers. We design every system with the knowledge that downtime costs money, bad user experience loses customers, and messy code creates headaches down the line.
             </p>
           </div>
 
@@ -255,12 +251,12 @@ export default async function AboutPage() {
       <section className="border-t border-slate-200 bg-slate-900 px-5 py-24 text-white lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-3xl">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-emerald-400">Institutional Governance</p>
-            <h2 className="mt-3 text-4xl font-semibold tracking-tight text-white md:text-5xl">
-              Legal structure, regulatory filings, and corporate transparency.
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-emerald-400">Corporate Governance</p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white md:text-5xl">
+              Verified legal standing and corporate registration.
             </h2>
             <p className="mt-6 text-base leading-relaxed text-white/70">
-              When enterprises, public institutions, and international founders partner with Anjal Ventures, they engage with a fully incorporated, compliant, and legally verifiable technology company.
+              When organizations, institutional clients, and international partners work with Anjal Solutions LTD, they engage with an incorporated and legally compliant Nigerian entity.
             </p>
           </div>
 
@@ -269,47 +265,47 @@ export default async function AboutPage() {
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <div className="flex items-center gap-2">
                   <Building2 className="h-5 w-5 text-emerald-400" />
-                  <span className="text-sm font-bold uppercase tracking-wider text-white">Public Verification Record</span>
+                  <span className="text-sm font-bold uppercase tracking-wider text-white">Public Corporate Record</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-xs font-mono text-emerald-300">Active & In Good Standing</span>
+                  <span className="text-xs font-mono text-emerald-300">Active and Verified</span>
                 </div>
               </div>
             </div>
 
             <div className="divide-y divide-white/10">
               {[
-                { label: 'Legal Corporate Name', value: 'Anjal Ventures', detail: 'Registered Technology & Software Enterprise' },
+                { label: 'Corporate Entity Name', value: 'Anjal Solutions LTD', detail: 'Formerly Anjal Ventures. Private Company Limited by Shares' },
                 {
                   label: 'CAC Registration Number',
-                  value: cac,
-                  detail: 'Corporate Affairs Commission, Federal Republic of Nigeria',
+                  value: `RC ${cac}`,
+                  detail: 'Corporate Affairs Commission, Federal Republic of Nigeria (CAMA 2020)',
                 },
                 {
-                  label: 'D-U-N-S Number (Dun & Bradstreet)',
-                  value: duns,
-                  detail: 'Global commercial business identity verification for international contracts',
+                  label: 'Date of Incorporation',
+                  value: 'September 13, 2026',
+                  detail: 'Incorporated under the Companies and Allied Matters Act 2020',
                 },
                 {
                   label: 'Tax Identification Number (TIN)',
                   value: tin,
-                  detail: 'Federal Inland Revenue Service (FIRS) active tax compliance',
+                  detail: 'Federal Inland Revenue Service (FIRS) active corporate tax ID',
                 },
                 {
-                  label: 'Registered Corporate Headquarters',
+                  label: 'Registered Corporate Office',
                   value: address,
-                  detail: 'Primary administrative, legal, and operational facilities in Damaturu, Yobe State',
+                  detail: 'Official registered address in Damaturu, Yobe State, Nigeria',
                 },
                 {
-                  label: 'Official General Inquiries',
+                  label: 'General Inquiries',
                   value: emailContact,
-                  detail: 'Direct institutional communications & client relations (24-hour response SLA)',
+                  detail: 'Client onboarding, project quotes, and corporate communications',
                 },
                 {
-                  label: 'Engineering & Developer Inquiries',
+                  label: 'Engineering Inquiries',
                   value: emailDev,
-                  detail: 'Technical architecture reviews, API integrations & security disclosures',
+                  detail: 'Technical scoping, API integrations, and developer relations',
                 },
               ].map((row, idx) => (
                 <div key={idx} className="grid grid-cols-1 gap-2 p-6 transition hover:bg-white/[0.02] md:grid-cols-3 md:items-center">
@@ -319,6 +315,28 @@ export default async function AboutPage() {
                 </div>
               ))}
             </div>
+
+            {/* Document Verification Box */}
+            <div className="border-t border-white/10 bg-white/[0.04] p-6">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <FileCheck className="h-6 w-6 text-emerald-400 shrink-0" />
+                  <div>
+                    <p className="text-sm font-bold text-white">Certificate of Incorporation</p>
+                    <p className="text-xs text-white/50">Official Certificate issued by the Corporate Affairs Commission (RC 9854225)</p>
+                  </div>
+                </div>
+                <a
+                  href="/docs/certificate-anjal-solutions-ltd.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-400 px-4 py-2.5 text-xs font-bold text-slate-950 transition hover:bg-emerald-300"
+                >
+                  View Official Certificate (PDF)
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -327,12 +345,12 @@ export default async function AboutPage() {
       <section className="bg-white px-5 py-24 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-3xl">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Engineering Benchmarks</p>
-            <h2 className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 md:text-5xl">
-              Strict technical specifications applied to every build.
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Engineering Standards</p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 md:text-5xl">
+              Consistent technical quality on every build.
             </h2>
             <p className="mt-6 text-base leading-relaxed text-slate-600">
-              We do not compromise on technical quality. Whether building an institutional website or a high-concurrency mobile application, our engineering deliverables conform to strict production benchmarks.
+              Whether building an enterprise web portal or a mobile application, we hold every deliverable to strict production standards.
             </p>
           </div>
 
@@ -367,12 +385,12 @@ export default async function AboutPage() {
       <section className="border-t border-slate-200 bg-slate-50 px-5 py-24 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-3xl">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">Operating Code</p>
-            <h2 className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 md:text-5xl">
-              Six core principles guiding our product studio.
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-blue-700">How We Work</p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 md:text-5xl">
+              Six principles guiding our engineering and client relationships.
             </h2>
             <p className="mt-6 text-base leading-relaxed text-slate-600">
-              These six operating principles dictate how we write software, communicate with clients, structure project milestones, and maintain our engineering culture.
+              These principles guide how we structure code, communicate with clients, and deliver finished projects.
             </p>
           </div>
 
@@ -395,23 +413,23 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* 7. The Damaturu Advantage & Regional Vision */}
+      {/* 7. Regional Presence */}
       <section className="bg-white px-5 py-24 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-blue-700">
                 <MapPin className="h-3.5 w-3.5" />
-                Regional Heritage & Vision
+                Damaturu Headquarters
               </div>
               <h2 className="mt-4 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl md:text-5xl">
-                Anchor for digital transformation across Northern Nigeria and beyond.
+                Delivering high-quality digital solutions from Yobe State.
               </h2>
               <p className="mt-6 text-base leading-relaxed text-slate-600">
-                Over 70% of businesses across Northern Nigeria and regional commercial corridors remain undigitized or reliant on brittle manual operations. Anjal Ventures was founded with a dual mission: to provide regional enterprises with direct access to tier-1 digital engineering, while delivering world-class software to international clients from our Damaturu headquarters.
+                Many growing businesses across Northern Nigeria still manage records and operations manually. We founded this studio to provide local businesses and institutions with direct access to modern, high-grade software engineering, while simultaneously delivering custom software to clients nationwide and abroad.
               </p>
               <p className="mt-4 text-base leading-relaxed text-slate-600">
-                By maintaining lean, focused operations in Yobe State, we offer our clients unparalleled attention, senior engineering dedication, and sustainable cost structures — without sacrificing a single millisecond of performance or a single line of security rigor.
+                By maintaining lean, focused operations in Damaturu, we give our clients direct attention from experienced engineers and reliable long-term support.
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -419,37 +437,37 @@ export default async function AboutPage() {
                   href="/work"
                   className="inline-flex items-center gap-2 rounded-lg bg-slate-950 px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white transition hover:bg-slate-800"
                 >
-                  Explore Shipped Systems
+                  Explore Delivered Work
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
                   href="/quote"
                   className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-3 text-xs font-semibold uppercase tracking-wider text-slate-900 transition hover:bg-slate-50"
                 >
-                  Commission a Build
+                  Start a Project Quote
                 </Link>
               </div>
             </div>
 
             <div className="rounded-2xl border border-slate-200 bg-slate-50 p-8 lg:p-10">
-              <h3 className="text-xs font-bold uppercase tracking-[0.22em] text-slate-500">Regional Footprint & Focus</h3>
+              <h3 className="text-xs font-bold uppercase tracking-[0.22em] text-slate-500">Core Areas of Work</h3>
               <div className="mt-6 space-y-6">
                 {[
                   {
-                    title: 'Enterprise & SME Digitization',
-                    desc: 'Transforming traditional commercial, logistics, and retail businesses into modern, automated digital enterprises.',
+                    title: 'Business Digitization & Web Platforms',
+                    desc: 'Helping commercial, logistics, and retail businesses move from paper to automated web platforms.',
                   },
                   {
-                    title: 'Public Sector & Institutional Platforms',
-                    desc: 'Architecting secure administrative portals, registries, and data management systems for institutional clients.',
+                    title: 'Institutional & Public Sector Portals',
+                    desc: 'Building clear, secure registries and internal management tools for educational and institutional teams.',
                   },
                   {
-                    title: 'Mobile Commerce & Financial Flows',
-                    desc: 'Engineering low-bandwidth, offline-resilient mobile applications tailored for diverse African network realities.',
+                    title: 'Mobile Applications for Real Network Realities',
+                    desc: 'Creating low-data, offline-resilient mobile applications that perform reliably on Android and iOS.',
                   },
                   {
-                    title: 'Pan-African & Global Software Export',
-                    desc: 'Delivering production software solutions to clients across Lagos, Abuja, London, Dubai, and North America.',
+                    title: 'Custom SaaS & Cloud Systems',
+                    desc: 'Engineering multi-user web software with subscription billing, role permissions, and reporting.',
                   },
                 ].map((item, idx) => (
                   <div key={idx} className="border-l-2 border-blue-600 pl-4">

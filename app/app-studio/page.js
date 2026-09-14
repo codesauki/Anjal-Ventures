@@ -5,7 +5,7 @@ import { getPlatformData } from '@/lib/platform-data'
 import { CheckCircle2, Smartphone, ShieldCheck, Zap } from 'lucide-react'
 
 export const metadata = {
-  title: 'Interactive Mobile App Studio - Anjal Ventures',
+  title: 'Interactive Mobile App Studio | Anjal Solutions LTD',
   description:
     'Architect your mobile application brief in real time. Configure presets, native features, preview interface screens, and download an institutional proposal brief.',
 }

@@ -50,10 +50,10 @@ export default function AdminSidebar() {
       <div className="border-b border-slate-200 p-5">
         <div className="flex items-center gap-3">
           <div className="relative h-10 w-10 overflow-hidden rounded-lg border border-slate-200">
-            <Image src="/logo.png" alt="Anjal Ventures" fill className="object-contain p-1.5" />
+            <Image src="/logo.png" alt="Anjal Solutions LTD" fill className="object-contain p-1.5" />
           </div>
           <div>
-            <p className="text-sm font-bold text-slate-950">Anjal Ventures</p>
+            <p className="text-sm font-bold text-slate-950">Anjal Solutions LTD</p>
             <p className="text-xs text-slate-500">Operations console</p>
           </div>
         </div>

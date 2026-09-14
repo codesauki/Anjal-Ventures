@@ -26,8 +26,8 @@ export default function Hero({ settings = {} }) {
     return () => observer.disconnect()
   }, [])
 
-  const companyName = settings.company_name || 'Anjal Ventures'
-  const badge = settings.hero_badge || 'CAC Registered: 9258709 · D-U-N-S: 352294840 · Active'
+  const companyName = settings.company_name || 'Anjal Solutions LTD'
+  const badge = settings.hero_badge && !settings.hero_badge.includes('D-U-N-S') ? settings.hero_badge : 'RC: 9854225 · TIN: 2623598796685'
   const startingPrice = settings.stats_starting_price || '100'
   const statsServices = settings.stats_services || '6'
   const statsProjects = settings.stats_smes || '42'
@@ -56,7 +56,7 @@ export default function Hero({ settings = {} }) {
             </h1>
 
             <p className="text-lg text-white/60 leading-relaxed mb-9 max-w-xl">
-              Premium web platforms, mobile apps, AI solutions and enterprise SaaS — delivered by Nigeria's first-mover technology partner in North-East Nigeria.
+              Custom web platforms, native mobile applications, and business software, delivered by Nigeria's leading technology partner in North-East Nigeria.
             </p>
 
             <div className="flex flex-wrap gap-4 mb-12">
@@ -106,7 +106,7 @@ export default function Hero({ settings = {} }) {
               <div className="flex items-center gap-3 p-4 rounded-xl" style={{ background: 'rgba(201,168,76,0.1)', border: '1px solid rgba(201,168,76,0.2)' }}>
                 <span className="text-lg">🏛️</span>
                 <span className="text-xs text-brand-gold">
-                  CAC Registered: 9258709 · D-U-N-S: 352294840 · TIN 2623553716975 · Damaturu, Yobe State, Nigeria
+                  CAC RC: 9854225 · TIN: 2623598796685 · Damaturu, Yobe State, Nigeria
                 </span>
               </div>
             </div>

@@ -12,7 +12,7 @@ export default function Services({ services = [] }) {
             Full-Stack Digital Solutions
           </h2>
           <p className="text-lg text-apple-space-gray font-light">
-            From frontend to cloud backend, AI integration, mobile apps, and APIs — we handle every layer with world-class craftsmanship.
+            From frontend to cloud backend, AI integration, mobile apps, and APIs, we handle every layer with world-class craftsmanship.
           </p>
         </div>
 

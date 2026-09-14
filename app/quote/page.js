@@ -5,7 +5,7 @@ import { getPlatformData } from '@/lib/platform-data'
 import { CheckCircle2, ShieldCheck, Zap, Coins } from 'lucide-react'
 
 export const metadata = {
-  title: 'Enterprise Architecture Estimator & Proposal Engine - Anjal Ventures',
+  title: 'Enterprise Architecture Estimator & Proposal Engine | Anjal Solutions LTD',
   description:
     'Configure your project scope, select scale and technical add-ons, view transparent USD & NGN pricing, and download an executive proposal PDF.',
 }
@@ -55,7 +55,7 @@ export default async function QuotePage() {
                 Institutional Proof
               </p>
               <p className="mt-2 text-xs text-white/60">
-                Proposals certified with CAC: 9258709 and D-U-N-S: 352294840.
+                Proposals certified with RC: 9854225 and TIN: 2623598796685.
               </p>
             </div>
             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">

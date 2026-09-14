@@ -6,9 +6,9 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 export const metadata = {
-  title: 'Web Platforms & SaaS Showcase - Anjal Ventures',
+  title: 'Web Platforms & SaaS Showcase | Anjal Solutions LTD',
   description:
-    'High-performance corporate websites, cloud portals, and SaaS platforms engineered by Anjal Ventures.',
+    'High-performance corporate websites, cloud portals, and SaaS platforms engineered by Anjal Solutions LTD.',
 }
 
 export default async function WebsitesWorkPage() {

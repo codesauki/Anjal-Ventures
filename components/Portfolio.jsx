@@ -11,7 +11,7 @@ export default function Portfolio({ projects = [] }) {
           </div>
           <h2 className="text-5xl md:text-6xl font-semibold text-apple-dark mb-8">Live Projects & Deployments</h2>
           <p className="text-lg text-apple-space-gray max-w-3xl font-light">
-            Every project here is live, publicly accessible, and serving real users — not prototypes or demos.
+            Every project here is live, publicly accessible, and serving real users, not prototypes or demos.
           </p>
         </div>
 

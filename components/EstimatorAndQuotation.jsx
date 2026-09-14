@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import toast from 'react-hot-toast'
+import { normalizeCompanyAddress, normalizeCacNumber } from '@/lib/company'
 
 export default function EstimatorAndQuotation({ settings = {}, calculator = {} }) {
   // ─── State for Estimator Section ───
@@ -86,15 +87,15 @@ export default function EstimatorAndQuotation({ settings = {}, calculator = {} }
       doc.setFont('helvetica', 'bold')
       doc.setFontSize(24)
       doc.setTextColor(255, 255, 255)
-      doc.text(settings.company_name || 'Anjal Ventures', margin, 20)
+      doc.text(settings.company_name || 'Anjal Solutions LTD', margin, 20)
 
       doc.setFont('helvetica', 'normal')
       doc.setFontSize(9)
       doc.setTextColor(200, 210, 220)
-      const cacClean = String(settings.company_cac || '9258709').replace(/^BN\s*[:\-\s]?\s*/i, '')
-      const dunsVal = settings.company_duns || '352294840'
-      doc.text(`CAC: ${cacClean} · D-U-N-S: ${dunsVal} · TIN: ${settings.company_tin || '2623553716975'}`, margin, 36)
-      doc.text(`${settings.company_email || 'contact@anjalventures.com'} · ${settings.company_address || 'Damaturu, Yobe State, Nigeria'}`, margin, 43)
+      const cacClean = normalizeCacNumber(settings.company_cac)
+      const tinVal = settings.company_tin || '2623598796685'
+      doc.text(`RC: ${cacClean} · TIN: ${tinVal}`, margin, 36)
+      doc.text(`${settings.company_email || 'contact@anjalventures.com'} · ${normalizeCompanyAddress(settings.company_address)}`, margin, 43)
 
       doc.setFont('helvetica', 'bold')
       doc.setFontSize(11)
@@ -115,7 +116,7 @@ export default function EstimatorAndQuotation({ settings = {}, calculator = {} }
       doc.setFont('helvetica', 'normal')
       doc.setFontSize(7)
       doc.setTextColor(100, 120, 140)
-      doc.text(settings.footer_tagline || 'We Build Digital Excellence — From Damaturu to the World.', pageW / 2, pageH - 5, { align: 'center' })
+      doc.text(settings.footer_tagline || 'We Build Digital Excellence - From Damaturu to the World.', pageW / 2, pageH - 5, { align: 'center' })
       doc.setTextColor(80, 100, 120)
       doc.text(`Page ${pageNum}`, pageW - margin, pageH - 5, { align: 'right' })
     }
@@ -135,7 +136,7 @@ export default function EstimatorAndQuotation({ settings = {}, calculator = {} }
     doc.setFont('helvetica', 'normal')
     doc.setFontSize(11)
     doc.setTextColor(10, 22, 40)
-    doc.text(form.client_name || '—', margin + 6, y + 10)
+    doc.text(form.client_name || '-', margin + 6, y + 10)
     if (form.entity_name) {
       doc.setFontSize(9)
       doc.setTextColor(100, 116, 139)
@@ -206,7 +207,7 @@ export default function EstimatorAndQuotation({ settings = {}, calculator = {} }
 
       doc.setTextColor(100, 116, 139)
       doc.setFontSize(7.5)
-      doc.text(item.cat || '—', pageW - margin - 60, y + 3.5)
+      doc.text(item.cat || '-', pageW - margin - 60, y + 3.5)
 
       doc.setTextColor(22, 163, 74)
       doc.setFont('helvetica', 'bold')
@@ -314,9 +315,9 @@ export default function EstimatorAndQuotation({ settings = {}, calculator = {} }
     doc.setTextColor(100, 116, 139)
     doc.text(`Email: ${settings.company_email || 'contact@anjalventures.com'}`, margin, y)
     y += 4
-    doc.text(`Engineering: ${settings.company_email_dev || 'developers@anjalventures.com'}`, margin, y)
+    doc.text(`Engineering: ${settings.company_email2 || 'developers@anjalventures.com'}`, margin, y)
     y += 4
-    doc.text(`Address: ${settings.company_address || 'Damaturu, Yobe State, Nigeria'}`, margin, y)
+    doc.text(`Address: ${normalizeCompanyAddress(settings.company_address)}`, margin, y)
 
     // Add footer to last page
     addFooter()
@@ -342,8 +343,8 @@ export default function EstimatorAndQuotation({ settings = {}, calculator = {} }
       // 2. Generate and download PDF
       const doc = await generatePDF()
       const now = new Date()
-      const quoteNum = `AV-${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(Date.now()).slice(-4)}`
-      doc.save(`Anjal-Ventures-Estimate-${quoteNum}.pdf`)
+      const quoteNum = `AS-${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(Date.now()).slice(-4)}`
+      doc.save(`Anjal-Solutions-Estimate-${quoteNum}.pdf`)
 
       // 3. Try to send email via EmailJS
       const pubKey = settings?.emailjs_public_key

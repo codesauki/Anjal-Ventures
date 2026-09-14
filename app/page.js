@@ -14,7 +14,7 @@ export default async function HomePage() {
       <ProjectGrid
         projects={projects.slice(0, 4)}
         title="Proof of serious execution."
-        intro="A curated view of active platforms, apps, SaaS systems, and digital infrastructure delivered or managed by Anjal Ventures."
+        intro="A curated view of active platforms, apps, SaaS systems, and digital infrastructure delivered or managed by Anjal Solutions LTD."
       />
       <ProcessBand />
       <PricingBand plans={pricingPlans} />

@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
+import { normalizeCompanyAddress, normalizeCacNumber } from '@/lib/company'
 
 export default function QuotationSection({ settings = {}, calculator = {} }) {
   const [form, setForm] = useState({
@@ -92,15 +93,15 @@ export default function QuotationSection({ settings = {}, calculator = {} }) {
     doc.setFont('helvetica', 'bold')
     doc.setFontSize(16)
     doc.setTextColor(255, 255, 255)
-    doc.text(settings.company_name || 'Anjal Ventures', textStartX, margin + 8)
+    doc.text(settings.company_name || 'Anjal Solutions LTD', textStartX, margin + 8)
 
     doc.setFont('helvetica', 'normal')
     doc.setFontSize(7.5)
     doc.setTextColor(148, 163, 184)
-    const cacClean = String(settings.company_cac || '9258709').replace(/^BN\s*[:\-\s]?\s*/i, '')
-    const dunsVal = settings.company_duns || '352294840'
-    doc.text(`CAC: ${cacClean} | D-U-N-S: ${dunsVal} | TIN: ${settings.company_tin || '2623553716975'}`, textStartX, margin + 19)
-    doc.text(settings.company_email || 'contact@anjalventures.com', textStartX, margin + 24)
+    const cacClean = normalizeCacNumber(settings.company_cac)
+    const tinVal = settings.company_tin || '2623598796685'
+    doc.text(`RC: ${cacClean} | TIN: ${tinVal}`, textStartX, margin + 19)
+    doc.text(`${settings.company_email || 'contact@anjalventures.com'} | (formerly Anjal Ventures)`, textStartX, margin + 24)
 
     // Quotation number and details on right side
     doc.setFont('helvetica', 'bold')
@@ -251,7 +252,7 @@ export default function QuotationSection({ settings = {}, calculator = {} }) {
       doc.setFont('helvetica', 'normal')
       doc.setFontSize(7)
       doc.setTextColor(100, 116, 139)
-      doc.text(item.cat || '—', tableColX.cat, currentY + 5)
+      doc.text(item.cat || '-', tableColX.cat, currentY + 5)
 
       // USD price
       doc.setFont('helvetica', 'bold')
@@ -351,7 +352,7 @@ export default function QuotationSection({ settings = {}, calculator = {} }) {
     doc.setFontSize(6.5)
     doc.setTextColor(100, 120, 140)
     doc.text(
-      settings.footer_tagline || 'We Build Digital Excellence — From Damaturu to the World.',
+      settings.footer_tagline || 'We Build Digital Excellence - From Damaturu to the World.',
       pageWidth / 2,
       footerY + 4,
       { align: 'center' }
@@ -359,7 +360,7 @@ export default function QuotationSection({ settings = {}, calculator = {} }) {
     
     doc.setFontSize(6)
     doc.text(
-      `${settings.company_email || 'contact@anjalventures.com'} • ${settings.company_email_dev || 'developers@anjalventures.com'} • ${settings.company_address || 'Damaturu, Yobe State, Nigeria'}`,
+      `${settings.company_email || 'contact@anjalventures.com'} • ${settings.company_email2 || 'developers@anjalventures.com'} • ${normalizeCompanyAddress(settings.company_address)}`,
       pageWidth / 2,
       footerY + 10,
       { align: 'center' }
@@ -383,8 +384,8 @@ export default function QuotationSection({ settings = {}, calculator = {} }) {
       // 2. Generate and download PDF
       const doc = await generatePDF()
       const now = new Date()
-      const quoteNum = `AV-${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(Date.now()).slice(-4)}`
-      doc.save(`Anjal-Ventures-Quotation-${quoteNum}.pdf`)
+      const quoteNum = `AS-${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(Date.now()).slice(-4)}`
+      doc.save(`Anjal-Solutions-Quotation-${quoteNum}.pdf`)
 
       // 3. Try to send email via EmailJS (same logic as Contact.jsx)
       const pubKey = settings?.emailjs_public_key

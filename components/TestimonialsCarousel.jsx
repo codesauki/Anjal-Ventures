@@ -53,7 +53,7 @@ export default function TestimonialsCarousel({ testimonials: initialTestimonials
               What Our Clients Say
             </h2>
             <p className="text-lg text-apple-space-gray mb-8 font-light">
-              Be the first to share your story working with Anjal Ventures. Submit your testimonial below.
+              Be the first to share your story working with Anjal Solutions LTD. Submit your testimonial below.
             </p>
             <a href="#testimonial-form" className="inline-block px-6 py-3 bg-apple-dark text-white font-semibold rounded-lg hover:bg-apple-dark-secondary transition-colors">
               Submit Your Testimonial ↓

@@ -3,14 +3,13 @@ import Image from 'next/image'
 import { normalizeCompanyAddress } from '@/lib/company'
 
 export function Footer({ settings = {} }) {
-  const companyName = settings.company_name || 'Anjal Ventures'
+  const companyName = settings.company_name || 'Anjal Solutions LTD'
   const email1 = settings.company_email || 'contact@anjalventures.com'
   const email2 = settings.company_email2 || 'developers@anjalventures.com'
-  const cac = (settings.company_cac || '9258709').replace(/^BN\s*[:\-\s]?\s*/i, '')
-  const duns = settings.company_duns || '352294840'
-  const tin = settings.company_tin || '2623553716975'
+  const cac = (settings.company_cac || '9854225').replace(/^(BN|RC)\s*[:\-\s]?\s*/i, '')
+  const tin = settings.company_tin || '2623598796685'
   const address = normalizeCompanyAddress(settings.company_address)
-  const tagline = settings.footer_tagline || 'We Build Digital Excellence - From Damaturu to the World.'
+  const tagline = settings.footer_tagline || 'Dependable digital products from Damaturu to the world.'
   const whatsappNumber = settings.company_whatsapp || settings.company_phone || '2348164135836'
   const whatsappUrl = `https://wa.me/${String(whatsappNumber).replace(/[^0-9]/g, '')}`
 
@@ -23,22 +22,34 @@ export function Footer({ settings = {} }) {
               <div className="w-10 h-10 relative flex-shrink-0">
                 <picture>
                   <source srcSet="/logo-md.webp" type="image/webp" />
-                  <Image src="/logo.png" alt="Logo" fill className="object-contain" onError={() => {}} />
+                  <Image src="/logo.png" alt="Anjal Solutions LTD Logo" fill className="object-contain" onError={() => {}} />
                 </picture>
               </div>
-              <span className="font-display font-bold text-xl text-white">
-                {companyName.split(' ')[0]} <span className="text-apple-blue">{companyName.split(' ').slice(1).join(' ')}</span>
-              </span>
+              <div>
+                <span className="font-display font-bold text-xl text-white">
+                  Anjal <span className="text-apple-blue">Solutions LTD</span>
+                </span>
+                <p className="text-[11px] text-white/50">(formerly Anjal Ventures)</p>
+              </div>
             </div>
-            <p className="text-sm text-white/45 leading-relaxed mb-6 max-w-sm">{tagline}</p>
+            <p className="text-sm text-white/60 leading-relaxed mb-6 max-w-sm">{tagline}</p>
             <div className="bg-apple-blue/10 border border-apple-blue/20 rounded-xl p-4">
-              <p className="text-xs text-white/40 leading-relaxed">
-                <span className="text-apple-blue font-semibold">CAC Registered:</span> {cac} /{' '}
-                <span className="text-apple-blue font-semibold">D-U-N-S:</span> {duns} /{' '}
+              <p className="text-xs text-white/50 leading-relaxed">
+                <span className="text-apple-blue font-semibold">CAC RC:</span> {cac} |{' '}
                 <span className="text-apple-blue font-semibold">TIN:</span> {tin}<br />
                 <span className="text-apple-blue font-semibold">Registered office:</span> {address}<br />
-                Status: <span className="text-apple-blue font-semibold">ACTIVE</span>
+                Status: <span className="text-apple-blue font-semibold">ACTIVE (CAMA 2020)</span>
               </p>
+              <div className="mt-3 pt-3 border-t border-apple-blue/20">
+                <a
+                  href="/docs/certificate-anjal-solutions-ltd.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-emerald-400 hover:text-emerald-300 underline font-medium inline-flex items-center gap-1"
+                >
+                  View CAC Certificate of Incorporation (PDF) →
+                </a>
+              </div>
             </div>
             <a
               href={whatsappUrl}
@@ -80,7 +91,7 @@ export function Footer({ settings = {} }) {
         </div>
 
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/25">Copyright 2026 {companyName}. All rights reserved. CAC {cac}.</p>
+          <p className="text-xs text-white/35">Copyright 2026 Anjal Solutions LTD (formerly Anjal Ventures). All rights reserved. RC {cac}.</p>
           <div className="flex gap-6">
             <span className="text-xs text-white/25 cursor-pointer hover:text-apple-blue transition-colors">Terms & Conditions</span>
             <span className="text-xs text-white/25 cursor-pointer hover:text-apple-blue transition-colors">Privacy Policy</span>

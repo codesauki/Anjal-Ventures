@@ -21,9 +21,9 @@ import { CtaBand } from '@/components/PlatformSections'
 import { getPlatformData } from '@/lib/platform-data'
 
 export const metadata = {
-  title: 'Engineering Services & Architecture - Anjal Ventures',
+  title: 'Engineering Services & Architecture - Anjal Solutions LTD',
   description:
-    'Institutional digital product engineering. Enterprise web platforms, iOS & Android applications, SaaS infrastructure, AI automation, and high-concurrency cloud systems.',
+    'Software development and digital solutions by Anjal Solutions LTD (formerly Anjal Ventures). Custom web platforms, iOS and Android apps, SaaS, and business management systems.',
 }
 
 const DISCIPLINES = [
@@ -269,7 +269,7 @@ export default async function ServicesPage() {
           </h1>
 
           <p className="mt-8 max-w-3xl text-lg leading-relaxed text-white/75 md:text-xl">
-            Anjal Ventures operates as an elite digital product studio and technology enterprise. We design, engineer, and maintain production-grade web platforms, native mobile applications, SaaS architectures, and automated infrastructure for ambitious teams across Nigeria and international markets.
+            Anjal Solutions LTD (formerly Anjal Ventures) operates as a digital product studio and technology company. We design, engineer, and maintain production-grade web platforms, native mobile applications, SaaS architectures, and automated infrastructure for ambitious teams across Nigeria and international markets.
           </p>
 
           {/* Quick Capability Matrix Strip */}
@@ -297,7 +297,7 @@ export default async function ServicesPage() {
             ['100% IP Ownership', 'All source code, design files & databases transferred to client.'],
             ['Zero Technical Debt', 'Strict typing, automated linters, and clean architecture.'],
             ['Store Deployment SLA', 'Guaranteed App Store & Google Play compliance & approval.'],
-            ['Enterprise Governance', 'CAC: 9258709 · D-U-N-S: 352294840 · Active Status.'],
+            ['Corporate Governance', 'RC: 9854225 · TIN: 2623598796685 · Active (CAMA 2020)'],
           ].map(([title, desc]) => (
             <div key={title} className="p-3 text-left">
               <p className="text-xs font-bold uppercase tracking-wider text-slate-900 flex items-center gap-1.5">

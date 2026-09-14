@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'Admin - Anjal Ventures',
+  title: 'Admin | Anjal Solutions LTD',
   robots: 'noindex, nofollow',
 }
 

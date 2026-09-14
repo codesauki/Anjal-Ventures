@@ -42,10 +42,10 @@ export default function AdminLogin() {
         <section className="hidden lg:flex min-h-[620px] flex-col justify-between border-r border-white/10 p-10">
           <div className="flex items-center gap-3">
             <div className="relative h-12 w-12 rounded-2xl bg-white p-2">
-              <Image src="/logo.png" alt="Anjal Ventures" fill className="object-contain p-2" />
+              <Image src="/logo.png" alt="Anjal Solutions LTD" fill className="object-contain p-2" />
             </div>
             <div>
-              <p className="text-sm font-semibold">Anjal Ventures</p>
+              <p className="text-sm font-semibold">Anjal Solutions LTD</p>
               <p className="text-xs text-white/45">Enterprise operations console</p>
             </div>
           </div>
@@ -65,9 +65,9 @@ export default function AdminLogin() {
         <section className="bg-white p-8 text-slate-950 sm:p-12">
           <div className="mb-10 lg:hidden">
             <div className="relative mb-4 h-14 w-14">
-              <Image src="/logo.png" alt="Anjal Ventures" fill className="object-contain" />
+              <Image src="/logo.png" alt="Anjal Solutions LTD" fill className="object-contain" />
             </div>
-            <p className="text-sm font-semibold text-slate-500">Anjal Ventures Admin</p>
+            <p className="text-sm font-semibold text-slate-500">Anjal Solutions Admin</p>
           </div>
 
           <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-blue-600">Secure Access</p>

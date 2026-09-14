@@ -238,6 +238,6 @@ anjal-ventures/
 
 ## 📞 Support
 
-Built by **Anjal Ventures** — [anjalventures@gmail.com](mailto:anjalventures@gmail.com)
+Built by **Anjal Solutions LTD** (formerly Anjal Ventures) - [contact@anjalventures.com](mailto:contact@anjalventures.com)
 
-CAC Registered · BN 9258709 · Damaturu, Yobe State, Nigeria
+CAC Registered · RC: 9854225 · TIN: 2623598796685 · Damaturu, Yobe State, Nigeria

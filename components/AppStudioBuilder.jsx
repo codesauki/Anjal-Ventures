@@ -20,10 +20,11 @@ import {
   CheckCircle2,
 } from 'lucide-react'
 import { EstimateSummary } from '@/components/PlatformSections'
+import { normalizeCompanyAddress, normalizeCacNumber } from '@/lib/company'
 
 function makeReference() {
   const now = new Date()
-  return `AV-APP-${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}-${String(Date.now()).slice(-6)}`
+  return `AS-APP-${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}-${String(Date.now()).slice(-6)}`
 }
 
 export default function AppStudioBuilder({ settings = {}, presets = [] }) {
@@ -97,14 +98,17 @@ export default function AppStudioBuilder({ settings = {}, presets = [] }) {
     doc.setTextColor(255, 255, 255)
     doc.setFont('helvetica', 'bold')
     doc.setFontSize(20)
-    doc.text(settings.company_name || 'Anjal Ventures', margin, 18)
+    const cac = normalizeCacNumber(settings.company_cac)
+    const tin = settings.company_tin || '2623598796685'
+    const address = normalizeCompanyAddress(settings.company_address)
+    doc.text('Anjal Solutions LTD', margin, 18)
 
     doc.setFontSize(8)
     doc.setFont('helvetica', 'normal')
     doc.setTextColor(148, 163, 184)
-    doc.text('CAC Registered: 9258709  |  D-U-N-S: 352294840  |  TIN: 2623553716975', margin, 26)
-    doc.text('Damaturu, Yobe State, Nigeria  |  contact@anjalventures.com', margin, 32)
-    doc.text('Executive Mobile Product Specification & Architecture Brief', margin, 38)
+    doc.text(`RC: ${cac}  |  TIN: ${tin}`, margin, 26)
+    doc.text(`${address}  |  ${settings.company_email || 'contact@anjalventures.com'}`, margin, 32)
+    doc.text('Anjal Solutions LTD (formerly Anjal Ventures) · Mobile Specification Brief', margin, 38)
 
     doc.setTextColor(59, 130, 246)
     doc.setFont('helvetica', 'bold')
@@ -215,8 +219,9 @@ export default function AppStudioBuilder({ settings = {}, presets = [] }) {
     // Footer
     doc.setFontSize(7.5)
     doc.setTextColor(148, 163, 184)
+    const cacFooter = normalizeCacNumber(settings.company_cac)
     doc.text(
-      'Anjal Ventures Product Studio · CAC: 9258709 · D-U-N-S: 352294840 · developers@anjalventures.com',
+      `Prepared by Anjal Solutions LTD (formerly Anjal Ventures) · RC: ${cacFooter}`,
       margin,
       288
     )
@@ -252,7 +257,7 @@ export default function AppStudioBuilder({ settings = {}, presets = [] }) {
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || 'Submission failed')
       const doc = await generatePDF(data.reference || reference)
-      doc.save(`Anjal-Ventures-${form.app_name.replace(/\s+/g, '-')}-Brief-${data.reference || reference}.pdf`)
+      doc.save(`Anjal-Solutions-${form.app_name.replace(/\s+/g, '-')}-Brief-${data.reference || reference}.pdf`)
       toast.success('Official application brief generated and saved!')
     } catch (err) {
       toast.error(err.message || 'Failed to submit app brief')

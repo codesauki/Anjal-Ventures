@@ -83,7 +83,7 @@
 ### Phase 6: `/about` — Studio Heritage, Engineering Governance & Credibility
 - **Enterprise Credibility**:
   - Product Studio Manifesto and engineering philosophy ("Built to Operate").
-  - Corporate verification section featuring CAC Registration `9258709`, D-U-N-S `352294840`, TIN `2623553716975`, and registered headquarters in Damaturu, Yobe State, Nigeria.
+  - Corporate verification section featuring CAC Registration `9854225`, TIN `2623598796685`, and registered headquarters in Damaturu, Yobe State, Nigeria.
   - Technical capabilities audit: languages, cloud infrastructure, database benchmarks, security protocols.
   - Studio Leadership & Engineering culture.
 

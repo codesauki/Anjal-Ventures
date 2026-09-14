@@ -16,9 +16,9 @@ const dmMono = DM_Mono({
 })
 
 export const metadata = {
-  title: 'Anjal Ventures - Premium Digital Product Studio',
-  description: 'Anjal Ventures builds premium websites, mobile apps, SaaS platforms, AI systems, and digital transformation infrastructure for African businesses and global enterprises.',
-  keywords: 'web development Nigeria, mobile app development, AI solutions Africa, SaaS platform, Damaturu technology company, digital transformation, custom software, CAC 9258709',
+  title: 'Anjal Solutions LTD - Enterprise Software and Digital Products',
+  description: 'Anjal Solutions LTD (formerly Anjal Ventures) builds websites, mobile apps, SaaS platforms, and enterprise digital systems. Incorporated in Nigeria under CAMA 2020 (RC 9854225).',
+  keywords: 'Anjal Solutions LTD, Anjal Ventures, web development Nigeria, mobile app development, Damaturu technology company, custom software, CAC 9854225, RC 9854225',
   manifest: '/manifest.json',
   icons: {
     icon: [
@@ -32,7 +32,7 @@ export const metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
-    title: 'Anjal Ventures',
+    title: 'Anjal Solutions',
   },
   formatDetection: {
     telephone: false,
@@ -42,26 +42,26 @@ export const metadata = {
     canonical: 'https://anjalventures.com',
   },
   openGraph: {
-    title: 'Anjal Ventures - Premium Digital Product Studio',
-    description: 'Premium digital products, native mobile apps, SaaS architectures, AI automation, and enterprise web platforms.',
+    title: 'Anjal Solutions LTD - Enterprise Software and Digital Products',
+    description: 'Custom software platforms, native mobile apps, SaaS architectures, and enterprise web solutions.',
     type: 'website',
     url: 'https://anjalventures.com',
-    siteName: 'Anjal Ventures',
+    siteName: 'Anjal Solutions LTD',
     locale: 'en_NG',
     images: [
       {
         url: 'https://anjalventures.com/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Anjal Ventures - Digital Product Studio',
+        alt: 'Anjal Solutions LTD - Digital Product Studio',
         type: 'image/png',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Anjal Ventures - Premium Digital Product Studio',
-    description: 'Premium digital products, native mobile apps, SaaS architectures, AI automation, and enterprise web platforms.',
+    title: 'Anjal Solutions LTD - Enterprise Software and Digital Products',
+    description: 'Custom software platforms, native mobile apps, SaaS architectures, and enterprise web solutions.',
     creator: '@anjalventures',
     images: ['https://anjalventures.com/og-image.png'],
   },
@@ -78,10 +78,11 @@ export default function RootLayout({ children }) {
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Anjal Ventures',
+    name: 'Anjal Solutions LTD',
+    alternateName: 'Anjal Ventures',
     url: 'https://anjalventures.com',
     logo: 'https://anjalventures.com/logo.png',
-    description: 'Premium digital product studio building enterprise websites, mobile apps, SaaS, AI systems, and digital infrastructure.',
+    description: 'Software development and digital solutions company building enterprise web platforms, mobile apps, and business systems.',
     sameAs: [
       'https://facebook.com/anjalventures',
       'https://twitter.com/anjalventures',
@@ -92,34 +93,29 @@ export default function RootLayout({ children }) {
       addressCountry: 'NG',
       addressRegion: 'Yobe State',
       addressLocality: 'Damaturu',
-      streetAddress: 'No. 4, MJG Global Ventures Complex, Kolomi Ali Street, Sabon Pegi',
+      streetAddress: 'No. 4, Kolomi Ali Street, Njiwaji Layout Sabon Fegi',
     },
     identifier: [
       {
         '@type': 'PropertyValue',
         propertyID: 'CAC Registration',
-        value: '9258709',
-      },
-      {
-        '@type': 'PropertyValue',
-        propertyID: 'D-U-N-S',
-        value: '352294840',
+        value: '9854225',
       },
       {
         '@type': 'PropertyValue',
         propertyID: 'Tax Identification Number',
-        value: '2623553716975',
+        value: '2623598796685',
       },
     ],
     contactPoint: [
       {
         '@type': 'ContactPoint',
-        contactType: 'General Inquiries & Client Relations',
+        contactType: 'General Inquiries and Client Relations',
         email: 'contact@anjalventures.com',
       },
       {
         '@type': 'ContactPoint',
-        contactType: 'Technical Architecture & Developer Support',
+        contactType: 'Technical Architecture and Developer Support',
         email: 'developers@anjalventures.com',
       },
     ],

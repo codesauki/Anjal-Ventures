@@ -2,16 +2,18 @@
 
 import { useState } from 'react'
 import toast from 'react-hot-toast'
-import { Mail, MapPin, Send, Terminal, Building2, CheckCircle2 } from 'lucide-react'
+import { Mail, MapPin, Send, Terminal, Building2, CheckCircle2, FileCheck, ArrowRight } from 'lucide-react'
+import { normalizeCompanyAddress, normalizeCacNumber } from '@/lib/company'
 
 export default function Contact({ settings = {}, services = [] }) {
   const [form, setForm] = useState({ name: '', email: '', service: '', budget: '', message: '' })
   const [loading, setLoading] = useState(false)
   const [sent, setSent] = useState(false)
 
-  const email1 = 'contact@anjalventures.com'
-  const email2 = 'developers@anjalventures.com'
-  const address = settings.company_address || 'No. 4, MJG Global Ventures Complex, Kolomi Ali Street, Sabon Pegi, Damaturu, Yobe State, Nigeria'
+  const email1 = settings.company_email || 'contact@anjalventures.com'
+  const email2 = settings.company_email2 || 'developers@anjalventures.com'
+  const address = normalizeCompanyAddress(settings.company_address)
+  const cac = normalizeCacNumber(settings.company_cac)
 
   const handleSubmit = async () => {
     if (!form.name || !form.email || !form.message) {
@@ -89,8 +91,20 @@ export default function Contact({ settings = {}, services = [] }) {
               icon={MapPin}
               label="Registered Headquarters"
               value={address}
-              description="Damaturu, Yobe State, Nigeria · CAC Registered: 9258709 · D-U-N-S: 352294840"
+              description={`Damaturu, Yobe State, Nigeria · RC: ${cac}`}
             />
+            <div className="pt-1">
+              <a
+                href="/docs/certificate-anjal-solutions-ltd.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-700 hover:text-blue-900 transition"
+              >
+                <FileCheck className="h-3.5 w-3.5 text-emerald-600" />
+                <span>View Official CAC Certificate (RC {cac})</span>
+                <ArrowRight className="h-3.5 w-3.5" />
+              </a>
+            </div>
           </div>
 
           <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

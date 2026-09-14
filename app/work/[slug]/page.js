@@ -53,11 +53,11 @@ export async function generateMetadata({ params }) {
   }
 
   return {
-    title: project ? `${project.title} — Architectural Case Study | Anjal Ventures` : 'Project Case Study — Anjal Ventures',
+    title: project ? `${project.title} - Architectural Case Study | Anjal Solutions LTD` : 'Project Case Study | Anjal Solutions LTD',
     description:
       project?.summary ||
       project?.description ||
-      'Production digital product architectural case study by Anjal Ventures.',
+      'Production digital product architectural case study by Anjal Solutions LTD.',
   }
 }
 
@@ -278,7 +278,7 @@ export default async function ProjectDetailPage({ params }) {
                   </div>
                   <div className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-1 font-mono text-xs text-white/60">
                     <Lock className="h-3 w-3 text-emerald-400" />
-                    <span>{project.url ? project.url.replace(/^https?:\/\//, '') : `${project.slug}.anjalventures.com`}</span>
+                    <span>{project.url ? project.url.replace(/^https?:\/\//, '') : `${project.slug}.anjal.ng`}</span>
                   </div>
                   <div className="w-12" />
                 </div>
@@ -507,7 +507,7 @@ export default async function ProjectDetailPage({ params }) {
 
             {/* Quick Consultation Card */}
             <div className="rounded-3xl border border-slate-200 bg-slate-950 p-6 text-white">
-              <span className="text-xs font-bold uppercase tracking-wider text-blue-300">Commission Anjal</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-blue-300">Commission Anjal Solutions</span>
               <h4 className="mt-2 text-xl font-semibold">Have a similar product vision?</h4>
               <p className="mt-2 text-xs leading-relaxed text-white/60">
                 Discuss technical feasibility, architecture recommendations, and fixed-price scope with our team.

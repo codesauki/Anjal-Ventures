@@ -84,7 +84,7 @@ export default function AdminCalculator() {
               <input className="input-field" placeholder="e.g. E-Commerce Store" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} />
             </div>
             <div>
-              <label className="label">Base Price (USD) — added to estimate</label>
+              <label className="label">Base Price (USD) (added to estimate)</label>
               <input type="number" step="0.01" className="input-field" placeholder="0.00" value={form.base_price} onChange={e => setForm({ ...form, base_price: e.target.value })} />
             </div>
             <div>

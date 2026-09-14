@@ -8,9 +8,9 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 export const metadata = {
-  title: 'Selected Work & Case Studies - Anjal Ventures',
+  title: 'Selected Work & Case Studies | Anjal Solutions LTD',
   description:
-    'Production web platforms, mobile applications, and enterprise cloud systems designed, engineered, and maintained by Anjal Ventures.',
+    'Production web platforms, mobile applications, and enterprise cloud systems designed, engineered, and maintained by Anjal Solutions LTD.',
 }
 
 export default async function WorkPage() {

@@ -8,17 +8,16 @@ const SETTING_GROUPS = [
     title: '🏢 Company Information',
     desc: 'Basic company details shown across the website',
     fields: [
-      { key: 'company_name', label: 'Company Name', placeholder: 'Anjal Ventures' },
+      { key: 'company_name', label: 'Company Name', placeholder: 'Anjal Solutions LTD' },
       { key: 'company_tagline', label: 'Tagline', placeholder: "Building Africa's Digital Infrastructure" },
       { key: 'company_email', label: 'Primary Corporate Email', type: 'email', placeholder: 'contact@anjalventures.com' },
       { key: 'company_email2', label: 'Engineering / Developer Email', type: 'email', placeholder: 'developers@anjalventures.com' },
       { key: 'company_phone', label: 'Primary Phone Number', placeholder: '+234 000 000 0000' },
       { key: 'company_phone_alternate', label: 'Alternate Phone Number', placeholder: '+234 000 000 0000' },
       { key: 'company_whatsapp', label: 'WhatsApp Number (digits only)', placeholder: '2348012345678' },
-      { key: 'company_address', label: 'Office Address', placeholder: 'No. 4, MJG Global Ventures Complex, Kolomi Ali Street, Sabon Pegi, Damaturu, Yobe State, Nigeria' },
-      { key: 'company_cac', label: 'CAC Registration Number', placeholder: '9258709' },
-      { key: 'company_duns', label: 'D-U-N-S Number', placeholder: '352294840' },
-      { key: 'company_tin', label: 'Tax ID (TIN)', placeholder: '2623553716975' },
+      { key: 'company_address', label: 'Office Address', placeholder: 'No. 4, Kolomi Ali Street, Njiwaji Layout Sabon Fegi, Damaturu, Yobe State, Nigeria' },
+      { key: 'company_cac', label: 'CAC Registration Number', placeholder: '9854225' },
+      { key: 'company_tin', label: 'Tax ID (TIN)', placeholder: '2623598796685' },
     ],
   },
   {
@@ -32,12 +31,12 @@ const SETTING_GROUPS = [
     title: '🏠 Homepage Content',
     desc: 'Text and content shown on the main landing page',
     fields: [
-      { key: 'hero_badge', label: 'Hero Badge Text', placeholder: 'CAC Registered: 9258709 · D-U-N-S: 352294840 · Active' },
+      { key: 'hero_badge', label: 'Hero Badge Text', placeholder: 'RC: 9854225 · TIN: 2623598796685 · Verified' },
       { key: 'hero_title', label: 'Hero Main Headline', placeholder: 'We build the digital products businesses actually use.' },
       { key: 'hero_description', label: 'Hero Description Paragraph', type: 'textarea', placeholder: 'From websites and mobile apps to marketplaces...' },
       { key: 'hero_tagline', label: 'Hero Value Proposition Tagline', placeholder: 'Built for people. Built for businesses. Built to work.' },
       { key: 'about_text', label: 'About Section Main Text', type: 'textarea', placeholder: 'Enter your company overview...' },
-      { key: 'footer_tagline', label: 'Footer Tagline', placeholder: 'We Build Digital Excellence — From Damaturu to the World.' },
+      { key: 'footer_tagline', label: 'Footer Tagline', placeholder: 'We Build Digital Excellence - From Damaturu to the World.' },
       { key: 'meta_description', label: 'SEO Meta Description', type: 'textarea', placeholder: 'Enter site description for search engines...' },
     ],
   },
@@ -53,7 +52,7 @@ const SETTING_GROUPS = [
   },
   {
     title: '📧 EmailJS Configuration',
-    desc: 'Connect EmailJS to forward contact form submissions directly to your Gmail inbox. Free service — no backend required.',
+    desc: 'Connect EmailJS to forward contact form submissions directly to your Gmail inbox. Free service - no backend required.',
     link: { href: 'https://www.emailjs.com', label: 'Get free EmailJS account →' },
     fields: [
       { key: 'emailjs_public_key', label: 'EmailJS Public Key', placeholder: 'your_public_key_here' },
@@ -116,7 +115,7 @@ export default function AdminSettings() {
           <div>
             <h1 className="font-display text-3xl text-navy mb-1">Site Settings</h1>
             <p className="text-slate-500 text-sm">
-              All text, contact details, EmailJS config, and statistics — controlled from here. Changes go live instantly.
+              All text, contact details, EmailJS config, and statistics - controlled from here. Changes go live instantly.
             </p>
           </div>
           <button onClick={handleSave} disabled={saving} className="btn btn-green px-8">
@@ -171,9 +170,9 @@ export default function AdminSettings() {
                   <ol className="list-decimal list-inside space-y-1 text-xs">
                     <li>Create a free account at <a href="https://www.emailjs.com" target="_blank" rel="noopener" className="underline">emailjs.com</a></li>
                     <li>Add an Email Service (connect your Gmail account)</li>
-                    <li>Create an Email Template — use variables: <code className="bg-blue-100 px-1 rounded">from_name</code>, <code className="bg-blue-100 px-1 rounded">from_email</code>, <code className="bg-blue-100 px-1 rounded">message</code>, <code className="bg-blue-100 px-1 rounded">service</code>, <code className="bg-blue-100 px-1 rounded">budget</code>, <code className="bg-blue-100 px-1 rounded">phone</code></li>
+                    <li>Create an Email Template: use variables: <code className="bg-blue-100 px-1 rounded">from_name</code>, <code className="bg-blue-100 px-1 rounded">from_email</code>, <code className="bg-blue-100 px-1 rounded">message</code>, <code className="bg-blue-100 px-1 rounded">service</code>, <code className="bg-blue-100 px-1 rounded">budget</code>, <code className="bg-blue-100 px-1 rounded">phone</code></li>
                     <li>Copy your Public Key, Service ID, and Template ID into the fields above</li>
-                    <li>Save settings — the contact form will now deliver directly to your Gmail</li>
+                    <li>Save settings - the contact form will now deliver directly to your Gmail</li>
                   </ol>
                 </div>
               )}

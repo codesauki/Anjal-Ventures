@@ -103,7 +103,7 @@ export default function AdminContacts() {
                 <div className="mt-4 pt-4 border-t border-slate-100">
                   <p className="text-sm text-slate-700 leading-relaxed bg-slate-50 p-4 rounded-xl">{m.message}</p>
                   <div className="flex gap-3 mt-3">
-                    <a href={`mailto:${m.email}?subject=Re: Your enquiry to Anjal Ventures`} className="btn btn-primary py-2 px-4 text-xs">📧 Reply by Email</a>
+                    <a href={`mailto:${m.email}?subject=Re: Your enquiry to Anjal Solutions LTD`} className="btn btn-primary py-2 px-4 text-xs">📧 Reply by Email</a>
                     {m.phone && <a href={`https://wa.me/${m.phone.replace(/[^0-9]/g,'')}`} target="_blank" rel="noopener" className="btn btn-green py-2 px-4 text-xs">💬 WhatsApp</a>}
                   </div>
                 </div>

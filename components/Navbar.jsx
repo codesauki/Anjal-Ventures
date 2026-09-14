@@ -30,13 +30,18 @@ export default function Navbar({ settings = {} }) {
                 <picture>
                   <source srcSet="/logo-sm.webp" type="image/webp" />
                   <source srcSet="/logo.png" type="image/png" />
-                  <Image src="/logo.png" alt="Anjal Ventures Logo" fill className="object-contain" priority onError={(e) => { e.target.style.display='none' }} />
+                  <Image src="/logo.png" alt="Anjal Solutions LTD Logo" fill className="object-contain" priority onError={(e) => { e.target.style.display='none' }} />
                 </picture>
                 <div className="w-10 h-10 bg-apple-dark rounded-lg flex items-center justify-center text-white font-display font-bold text-lg absolute inset-0 opacity-0 logo-fallback">A</div>
               </div>
-              <span className="font-display font-bold text-lg text-apple-dark">
-                Anjal Ventures
-              </span>
+              <div className="flex flex-col">
+                <span className="font-display font-bold text-base md:text-lg text-apple-dark leading-tight">
+                  {settings.company_name || 'Anjal Solutions LTD'}
+                </span>
+                <span className="text-[10px] text-gray-500 font-medium">
+                  (formerly Anjal Ventures)
+                </span>
+              </div>
             </a>
 
             {/* Desktop Links */}
